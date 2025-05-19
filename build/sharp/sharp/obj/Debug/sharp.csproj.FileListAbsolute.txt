@@ -1,0 +1,13 @@
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\bin\Debug\sharp.exe.config
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\bin\Debug\sharp.exe
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\bin\Debug\sharp.pdb
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.csproj.AssemblyReference.cache
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.Form1.resources
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.Properties.Resources.resources
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.csproj.GenerateResource.cache
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.csproj.CoreCompileInputs.cache
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.exe
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.pdb
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.unitconverter.resources
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.scientificcalculator.resources
+C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.description.resources
