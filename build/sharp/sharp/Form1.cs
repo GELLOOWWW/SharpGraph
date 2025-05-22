@@ -61,7 +61,7 @@ namespace sharp
         private void button2_Click(object sender, EventArgs e)
         {
             scientificcalculator wow = new scientificcalculator();
-                wow.Show();
+            wow.Show();
         }
 
         private void button5_Click_1(object sender, EventArgs e)

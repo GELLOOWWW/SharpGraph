@@ -11,3 +11,17 @@ C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.pdb
 C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.unitconverter.resources
 C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.scientificcalculator.resources
 C:\Users\Angelo Ebarvia\source\repos\sharp\sharp\obj\Debug\sharp.description.resources
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.csproj.AssemblyReference.cache
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.exe.config
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.exe
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.pdb
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\bin\Debug\sharp.exe.config
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\bin\Debug\sharp.exe
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\bin\Debug\sharp.pdb
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.description.resources
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.Form1.resources
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.Properties.Resources.resources
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.scientificcalculator.resources
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.unitconverter.resources
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.csproj.GenerateResource.cache
+C:\Users\Lain\source\repos\GELLOOWWW\SharpGraph\build\sharp\sharp\obj\Debug\sharp.csproj.CoreCompileInputs.cache

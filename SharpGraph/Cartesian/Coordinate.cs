@@ -1,10 +1,11 @@
 namespace SharpGraph.Cartesian
 {
     //
-    public class CoordinateSystem
+    public class Coordinate
     {
         public float xMin, xMax, yMin, yMax;
-        private int width, height;
+        public int ScreenWidth { get; private set; }
+        public int ScreenHeight { get; private set; }
 
         /// <summary>
         /// Initialize a new Coordinate System object.
@@ -12,74 +13,46 @@ namespace SharpGraph.Cartesian
         /// <param name="padding"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public void InitCoordinateSystem(int width, int height)
+        public void UpdateMap(int width, int height)
         {
-            this.width = width;
-            this.height = height;
+            this.ScreenWidth = width;
+            this.ScreenHeight = height;
 
             CalculateBounds();
-        }
-
-        //idk
-        public void SetBounds(float xMinNew, float xMaxNew, float yMinNew, float yMaxNew)
-        {
-            this.xMin = xMinNew;
-            this.xMax = xMaxNew;
-            this.yMin = yMinNew;
-            this.yMax = yMaxNew;
-        }
-
-        /// <summary>
-        /// Calculate Minimum and Maximum X and Y Cartesian Coordinates.
-        /// </summary>
-        public void CalculateBounds()
-        {
-            float unitsPerPixel = 0.03f;
-
-            xMin = -((width - 2) * unitsPerPixel) / 2;
-            xMax = -xMin; // Symmetric around 0
-            yMin = -((height - 2) * unitsPerPixel) / 2;
-            yMax = -yMin; // Symmetric around 0
         }
 
         /// <summary>
         /// Calculate Minimum and Maximum X and Y Cartesian Coordinates.
         /// </summary>
         /// <param name="unitsPerPixel"></param>
-        public void CalculateBounds(float unitsPerPixel)
+        public void CalculateBounds(float unitsPerPixel = 0.025f)
         {
-            xMin = -((width - 2) * unitsPerPixel) / 2;
+            xMin = -((ScreenWidth - 2) * unitsPerPixel) / 2;
             xMax = -xMin; // Symmetric around 0
-            yMin = -((height - 2) * unitsPerPixel) / 2;
+            yMin = -((ScreenHeight - 2) * unitsPerPixel) / 2;
             yMax = -yMin; // Symmetric around 0
         }
 
         public float GridSpacingX()
         {
-            return CalcGridSpacing(xMin, xMax, width - 2);
+            return CalcGridSpacing(xMin, xMax, ScreenWidth - 2);
         }
         public float GridSpacingY()
         {
-            return CalcGridSpacing(yMin, yMax, height - 2);
-        }
-
-        public void UpdateDimensions(int w, int h)
-        {
-            this.width = w;
-            this.height = h;
+            return CalcGridSpacing(yMin, yMax, ScreenHeight - 2);
         }
 
         public int MapXToScreen(float x)
-            => (int)((x - xMin) / (xMax - xMin) * (width - 2));
+            => (int)((x - xMin) / (xMax - xMin) * (ScreenWidth - 2));
 
         public int MapYToScreen(float y)
-            => (int)((yMax - y) / (yMax - yMin) * (height - 2));
+            => (int)((yMax - y) / (yMax - yMin) * (ScreenHeight - 2));
 
         public double MapScreenToX(int px)
-            => xMin + px * (xMax - xMin) / (width - 2);
+            => xMin + px * (xMax - xMin) / (ScreenWidth - 2);
 
         public double MapScreenToY(int py)
-            => yMax - py * (yMax - yMin) / (height - 2);
+            => yMax - py * (yMax - yMin) / (ScreenHeight - 2);
 
         private static float CalcGridSpacing(float min, float max, int screenSize, int targetPixelsPerGrid = 40)
         {

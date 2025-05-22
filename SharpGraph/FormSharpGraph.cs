@@ -1,4 +1,4 @@
-﻿using SharpGraph.Cartesian;
+using SharpGraph.Cartesian;
 
 namespace SharpGraph
 {
@@ -7,12 +7,12 @@ namespace SharpGraph
         public FormSharpGraph()
         {
             InitializeComponent();
-            Text = "SharpGraph";
         }
 
         private void FormSharpGraph_Load(object sender, EventArgs e)
         {
-            _ = new GraphRender(pbGraphScreen);
+            GraphRender Graph = new(pbGraphScreen);
+            Graph.Start();
         }
     }
 }
