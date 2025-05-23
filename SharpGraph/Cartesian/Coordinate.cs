@@ -33,13 +33,13 @@ namespace SharpGraph.Cartesian
             yMax = -yMin; // Symmetric around 0
         }
 
-        public float GridSpacingX()
+        public float GridSpacingX(int targetPixelsPerGrid = 40)
         {
-            return CalcGridSpacing(xMin, xMax, ScreenWidth - 2);
+            return CalcGridSpacing(xMin, xMax, ScreenWidth - 2, targetPixelsPerGrid);
         }
-        public float GridSpacingY()
+        public float GridSpacingY(int targetPixelsPerGrid = 40)
         {
-            return CalcGridSpacing(yMin, yMax, ScreenHeight - 2);
+            return CalcGridSpacing(yMin, yMax, ScreenHeight - 2, targetPixelsPerGrid);
         }
 
         public int MapXToScreen(float x)
@@ -54,7 +54,7 @@ namespace SharpGraph.Cartesian
         public double MapScreenToY(int py)
             => yMax - py * (yMax - yMin) / (ScreenHeight - 2);
 
-        private static float CalcGridSpacing(float min, float max, int screenSize, int targetPixelsPerGrid = 40)
+        public static float CalcGridSpacing(float min, float max, int screenSize, int targetPixelsPerGrid = 40)
         {
             float range = max - min;
             float approxSpacing = range / (screenSize / targetPixelsPerGrid);
