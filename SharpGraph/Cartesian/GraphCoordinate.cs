@@ -1,7 +1,7 @@
 namespace SharpGraph.Cartesian
 {
     //
-    public class Coordinate
+    public class GraphCoordinate
     {
         public float xMin, xMax, yMin, yMax;
         public int ScreenWidth { get; private set; }
