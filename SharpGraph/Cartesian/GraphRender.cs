@@ -1,44 +1,78 @@
 ﻿using System.Drawing.Drawing2D;
+using SharpGraph.Expressions;
 
 namespace SharpGraph.Cartesian
 {
-    /// <summary>
-    /// GraphRender constructor
-    /// </summary>
-    /// <param name="pb"></param>
     public class GraphRender(PictureBox pb)
     {
-        private readonly PictureBox pbGraph = pb ?? throw new ArgumentNullException(nameof(pb));
-        private Coordinate mapper = new();
+        private readonly PictureBox pbGraph = pb;
+        private readonly Coordinate mapper = new();
+
+        // Store rendered layers
+        private readonly List<Bitmap> graphLayers = [];
+        public Stack<ParsedExpression> Expressions = [];
 
         public void Start()
         {
             pbGraph.Paint += PbGraph_Paint;
             pbGraph.Resize += PbGraph_Resize;
-
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
+        }
+
+        public async void AddExpression(ParsedExpression exp)
+        {
+            if (exp.CompiledFunction is null) return;
+
+            Expressions.Push(exp);
+            mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
+
+            var bmp = await GraphDraw.GraphAsync(mapper, exp, step: 1);
+            graphLayers.Add(bmp);
+
+            Refresh();
+        }
+        public async void RemoveExpression()
+        {
+            Expressions.Pop();
+            Refresh();
         }
 
         private void PbGraph_Paint(object? sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
+            var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(Settings.BgColor);
 
-            var graphs = new List<ExpressionGraph>
-            {
-                new((x,y) => Math.Pow(x - 2, 2) + Math.Pow(y - 2, 2) - 25, Color.Red),
-                new((x,y) => Math.Sin(x*2)*5 - y, Color.Blue),
-            };
+            GraphDraw.Grids(g, mapper);
+            GraphDraw.Axes(g, mapper);
 
-            Cartesian.Draw.Grid(g, mapper);
-            Cartesian.Draw.Axis(g, mapper);
-            Cartesian.Draw.Graphs(g, mapper, graphs, 2);
+            foreach (var bmp in graphLayers)
+            {
+                g.DrawImageUnscaled(bmp, 0, 0);
+            }
         }
 
         private void PbGraph_Resize(object? sender, EventArgs e)
         {
+            Refresh();
+        }
+
+        private async void Refresh()
+        {
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
+
+            // Clear old layers and re-render all expressions
+            foreach (var bmp in graphLayers)
+                bmp.Dispose();
+            graphLayers.Clear();
+
+            foreach (var expr in Expressions)
+            {
+                if (expr.CompiledFunction is null) continue;
+                var bmp = await GraphDraw.GraphAsync(mapper, expr, step: 4);
+                graphLayers.Add(bmp);
+            }
+
             pbGraph.Invalidate();
         }
     }
