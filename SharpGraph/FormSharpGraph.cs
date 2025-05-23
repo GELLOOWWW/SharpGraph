@@ -9,8 +9,8 @@ namespace SharpGraph
 
         private void FormSharpGraph_Load(object sender, EventArgs e)
         {
-            InitSharpGraph init = new();
-            init.StartScreen(pbGraphScreen);
+            InitSharpGraph init = new(pbGraphScreen);
+            init.StartScreen();
             init.StartPanel(spltPanels.Panel1);
         }
     }

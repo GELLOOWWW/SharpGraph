@@ -3,20 +3,21 @@ using SharpGraph.Expressions;
 
 namespace SharpGraph
 {
-    public class InitSharpGraph
+    public class InitSharpGraph(PictureBox pb)
     {
-        private PictureBox pbScreen;
-        private GraphRender graph;
+        private readonly PictureBox pbScreen = pb;
+        private GraphRender graph = new(pb);
+
         /// <summary>
         /// starts the Graphing screen.
         /// </summary>
         /// <param name="pb"></param>
-        public void StartScreen(PictureBox pb)
+        public void StartScreen()
         {
-            this.pbScreen = pb;
             this.graph = new GraphRender(pbScreen);
             graph.Start();
         }
+
         /// <summary>
         /// Starts the panel for expressions input.
         /// </summary>
@@ -29,7 +30,7 @@ namespace SharpGraph
                 var parsed = await ExpressionParser.TryParseAsync(expression);
                 if (parsed.IsValid)
                 {
-                    graph.AddExpression(parsed);
+                    await graph.AddExpression(parsed);
                 }
             };
 
