@@ -45,8 +45,8 @@
             // spltPanels.Panel2
             // 
             spltPanels.Panel2.Controls.Add(pbGraphScreen);
-            spltPanels.Size = new Size(964, 521);
-            spltPanels.SplitterDistance = 321;
+            spltPanels.Size = new Size(1084, 661);
+            spltPanels.SplitterDistance = 360;
             spltPanels.TabIndex = 0;
             // 
             // pbGraphScreen
@@ -54,7 +54,7 @@
             pbGraphScreen.Dock = DockStyle.Fill;
             pbGraphScreen.Location = new Point(0, 0);
             pbGraphScreen.Name = "pbGraphScreen";
-            pbGraphScreen.Size = new Size(639, 521);
+            pbGraphScreen.Size = new Size(720, 661);
             pbGraphScreen.TabIndex = 0;
             pbGraphScreen.TabStop = false;
             // 
@@ -62,7 +62,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(964, 521);
+            ClientSize = new Size(1084, 661);
             Controls.Add(spltPanels);
             Name = "FormSharpGraph";
             Text = "Sharp Graph";

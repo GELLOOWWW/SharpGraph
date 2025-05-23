@@ -1,5 +1,3 @@
-using SharpGraph.Cartesian;
-
 namespace SharpGraph
 {
     public partial class FormSharpGraph : Form
@@ -11,8 +9,9 @@ namespace SharpGraph
 
         private void FormSharpGraph_Load(object sender, EventArgs e)
         {
-            GraphRender Graph = new(pbGraphScreen);
-            Graph.Start();
+            InitSharpGraph init = new();
+            init.StartScreen(pbGraphScreen);
+            init.StartPanel(spltPanels.Panel1);
         }
     }
 }
