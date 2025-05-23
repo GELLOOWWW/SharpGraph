@@ -6,7 +6,8 @@ namespace SharpGraph.Cartesian
     public class GraphRender(PictureBox pb)
     {
         private readonly PictureBox pbGraph = pb;
-        private readonly Coordinate mapper = new();
+        private readonly GraphCoordinate mapper = new();
+        private static readonly int step = 1;
 
         // Store rendered layers
         private readonly List<Bitmap> graphLayers = [];
@@ -19,23 +20,27 @@ namespace SharpGraph.Cartesian
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
         }
 
-        public async void AddExpression(ParsedExpression exp)
+        public async Task AddExpression(ParsedExpression exp)
         {
             if (exp.CompiledFunction is null) return;
 
             Expressions.Push(exp);
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
 
-            var bmp = await GraphDraw.GraphAsync(mapper, exp, step: 1);
+            var bmp = await GraphDraw.GraphAsync(mapper, exp, step);
             graphLayers.Add(bmp);
 
             Refresh();
         }
-        public async void RemoveExpression()
+        public void RemoveExpression()
         {
             Expressions.Pop();
             Refresh();
         }
+
+        /**********************************************************
+
+        **********************************************************/
 
         private void PbGraph_Paint(object? sender, PaintEventArgs e)
         {
@@ -69,7 +74,7 @@ namespace SharpGraph.Cartesian
             foreach (var expr in Expressions)
             {
                 if (expr.CompiledFunction is null) continue;
-                var bmp = await GraphDraw.GraphAsync(mapper, expr, step: 4);
+                var bmp = await GraphDraw.GraphAsync(mapper, expr, step);
                 graphLayers.Add(bmp);
             }
 

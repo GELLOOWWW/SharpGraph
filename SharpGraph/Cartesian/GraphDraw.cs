@@ -1,121 +1,183 @@
-using SharpGraph.Expressions;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using SharpGraph.Expressions;
+
 
 namespace SharpGraph.Cartesian
 {
     public static class GraphDraw
     {
-        public static async Task<Bitmap> GraphAsync(Coordinate mapper, ParsedExpression expr, int step = 5, CancellationToken token = default)
+        /// <summary>
+        /// Asynchronously generates a bitmap visualizing the implicit curve f(x, y) = 0 using the Marching Squares algorithm.
+        /// </summary>
+        /// <param name="mapper">Coordinate mapper defining the Cartesian coordinate system and screen dimensions.</param>
+        /// <param name="expr">Parsed expression representing f(x, y).</param>
+        /// <param name="step">Step size in pixels between sampling points for the Marching Squares grid.</param>
+        /// <returns>A Task representing the asynchronous operation, with a Bitmap result containing the graph image.</returns>
+        public static async Task<Bitmap> GraphAsync(GraphCoordinate mapper, ParsedExpression expr, int step = 2)
         {
-            if (mapper is null) throw new ArgumentNullException(nameof(mapper));
+            // Validate input arguments: ensure mapper is not null,
+            // step is positive, and expression has a compiled function
+            ArgumentNullException.ThrowIfNull(mapper);
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(step);
             if (expr?.CompiledFunction is null) throw new ArgumentNullException(nameof(expr));
-            if (step <= 0) throw new ArgumentOutOfRangeException(nameof(step));
 
+            // Cache screen dimensions for convenience
             int width = mapper.ScreenWidth;
             int height = mapper.ScreenHeight;
 
-            return await Task.Run(() =>
+            // Calculate the number of points in the grid along x and y
+            // Added +2 to cover boundary edges completely
+            int xCount = (width / step) + 2;
+            int yCount = (height / step) + 2;
+
+            // 2D arrays to hold function evaluations and their validity status
+            double[,] values = new double[xCount, yCount];
+            bool[,] valid = new bool[xCount, yCount]; // Tracks if function value is finite
+
+            // Compute function values asynchronously and in parallel for efficiency
+            await Task.Run(() =>
             {
-                var bitmap = new Bitmap(width, height);
-                using var g = Graphics.FromImage(bitmap);
-                using var pen = new Pen(Color.Blue, 2);
-
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.Clear(Color.Transparent);
-
-                double[,] values = new double[(width / step) + 2, (height / step) + 2];
-
-                // Precompute values for performance
-                for (int ix = 0, gx = 0; ix < width; ix += step, gx++)
+                Parallel.For(0, xCount, gx =>
                 {
-                    for (int iy = 0, gy = 0; iy < height; iy += step, gy++)
+                    for (int gy = 0; gy < yCount; gy++)
                     {
-                        if (token.IsCancellationRequested) return bitmap;
+                        int ix = gx * step;
+                        int iy = gy * step;
+
+                        // Map pixel coordinates to Cartesian coordinates
                         double x = mapper.MapScreenToX(ix);
                         double y = mapper.MapScreenToY(iy);
-                        values[gx, gy] = expr.CompiledFunction(x, y);
-                    }
-                }
 
-                // Helper for interpolation
-                static PointF Interpolate(PointF p1, PointF p2, double v1, double v2)
-                {
-                    float t = (float)(v1 / (v1 - v2));
-                    return new PointF(
-                        p1.X + t * (p2.X - p1.X),
-                        p1.Y + t * (p2.Y - p1.Y)
-                    );
-                }
-
-                // Marching Squares
-                for (int ix = 0, gx = 0; ix < width - step; ix += step, gx++)
-                {
-                    for (int iy = 0, gy = 0; iy < height - step; iy += step, gy++)
-                    {
-                        if (token.IsCancellationRequested) return bitmap;
-
-                        PointF p0 = new(ix, iy);
-                        PointF p1 = new(ix + step, iy);
-                        PointF p2 = new(ix + step, iy + step);
-                        PointF p3 = new(ix, iy + step);
-
-                        double v0 = values[gx, gy];
-                        double v1_ = values[gx + 1, gy];
-                        double v2 = values[gx + 1, gy + 1];
-                        double v3 = values[gx, gy + 1];
-
-                        int state = 0;
-                        if (v0 < 0) state |= 1;
-                        if (v1_ < 0) state |= 2;
-                        if (v2 < 0) state |= 4;
-                        if (v3 < 0) state |= 8;
-
-                        switch (state)
+                        try
                         {
-                            case 0:
-                            case 15:
-                                break;
-                            case 1:
-                            case 14:
-                                g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p0, p3, v0, v3));
-                                break;
-                            case 2:
-                            case 13:
-                                g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p1, p2, v1_, v2));
-                                break;
-                            case 3:
-                            case 12:
-                                g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p0, p3, v0, v3));
-                                break;
-                            case 4:
-                            case 11:
-                                g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p2, p3, v2, v3));
-                                break;
-                            case 5:
-                                g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p0, p3, v0, v3));
-                                g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p2, p3, v2, v3));
-                                break;
-                            case 6:
-                            case 9:
-                                g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p2, p3, v2, v3));
-                                break;
-                            case 7:
-                            case 8:
-                                g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p2, p3, v2, v3));
-                                break;
-                            case 10:
-                                g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p1, p2, v1_, v2));
-                                break;
+                            // Evaluate the expression at (x, y)
+                            double result = expr.CompiledFunction(x, y);
+                            values[gx, gy] = result;
+
+                            // Mark the value as valid only if it is a finite number
+                            valid[gx, gy] = !double.IsNaN(result) && !double.IsInfinity(result);
+                        }
+                        catch
+                        {
+                            // On exceptions, mark as invalid and assign 0 for safety
+                            values[gx, gy] = 0;
+                            valid[gx, gy] = false;
                         }
                     }
+                });
+            });
+
+            // Create a bitmap image of the specified screen dimensions
+            var bitmap = new Bitmap(width, height);
+
+            // Prepare graphics object for drawing on the bitmap
+            using var g = Graphics.FromImage(bitmap);
+            using var pen = new Pen(Color.Blue, 2f); // Blue pen, 2 pixels wide
+
+            // Enable anti-aliasing to produce smooth contour lines
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Start with a clean transparent canvas
+            g.Clear(Color.Transparent);
+
+            // Local helper to interpolate contour crossing point along an edge
+            // between two pixel points p1 and p2 with function values v1 and v2
+            static PointF Interpolate(PointF p1, PointF p2, double v1, double v2)
+            {
+                float t = (float)(v1 / (v1 - v2)); // Linear interpolation factor
+                return new PointF(
+                    p1.X + t * (p2.X - p1.X),
+                    p1.Y + t * (p2.Y - p1.Y)
+                );
+            }
+
+            // Iterate over every cell defined by four neighboring grid points
+            for (int gx = 0; gx < xCount - 1; gx++)
+            {
+                for (int gy = 0; gy < yCount - 1; gy++)
+                {
+                    int ix = gx * step;
+                    int iy = gy * step;
+
+                    // Define corners of the cell in pixel coordinates
+                    PointF p0 = new(ix, iy);
+                    PointF p1 = new(ix + step, iy);
+                    PointF p2 = new(ix + step, iy + step);
+                    PointF p3 = new(ix, iy + step);
+
+                    // Extract corresponding function values at the cell corners
+                    double v0 = values[gx, gy];
+                    double v1_ = values[gx + 1, gy];
+                    double v2 = values[gx + 1, gy + 1];
+                    double v3 = values[gx, gy + 1];
+
+                    // Extract validity information to skip invalid cells
+                    bool b0 = valid[gx, gy];
+                    bool b1 = valid[gx + 1, gy];
+                    bool b2 = valid[gx + 1, gy + 1];
+                    bool b3 = valid[gx, gy + 1];
+
+                    // Skip cells with any invalid function value or discontinuity
+                    if (!b0 || !b1 || !b2 || !b3)
+                        continue;
+
+                    // Heuristic skip: if difference in values on edges is large, likely discontinuity
+                    if (Math.Abs(v0 - v1_) > 10 || Math.Abs(v1_ - v2) > 10 || Math.Abs(v2 - v3) > 10 || Math.Abs(v3 - v0) > 10)
+                        continue;
+
+                    // Determine cell state as a 4-bit mask based on sign of corner values
+                    int state = 0;
+                    if (v0 < 0) state |= 1;
+                    if (v1_ < 0) state |= 2;
+                    if (v2 < 0) state |= 4;
+                    if (v3 < 0) state |= 8;
+
+                    // Use marching squares lookup to draw contour lines within this cell
+                    switch (state)
+                    {
+                        case 0:
+                        case 15:
+                            // No crossings if all corners have same sign
+                            break;
+                        case 1:
+                        case 14:
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p0, p3, v0, v3));
+                            break;
+                        case 2:
+                        case 13:
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p1, p2, v1_, v2));
+                            break;
+                        case 3:
+                        case 12:
+                            g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p0, p3, v0, v3));
+                            break;
+                        case 4:
+                        case 11:
+                            g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p2, p3, v2, v3));
+                            break;
+                        case 5:
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p0, p3, v0, v3));
+                            g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p2, p3, v2, v3));
+                            break;
+                        case 6:
+                        case 9:
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p2, p3, v2, v3));
+                            break;
+                        case 7:
+                        case 8:
+                            g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p2, p3, v2, v3));
+                            break;
+                        case 10:
+                            g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p1, p2, v1_, v2));
+                            break;
+                    }
                 }
-
-                return bitmap;
-
-            }, token);
+            }
+            return bitmap;
         }
+
 
         /// <summary>
         /// Draws minor and major grids in a Graphics object.
@@ -123,7 +185,7 @@ namespace SharpGraph.Cartesian
         /// <remarks>grid spacing is handled by the Coordinate object.</remarks>
         /// <param name="g"></param>
         /// <param name="mapper"></param>
-        public static void Grids(Graphics g, Coordinate mapper)
+        public static void Grids(Graphics g, GraphCoordinate mapper)
         {
             using Pen minorPen = new(Settings.MinorGridColor, 1) { DashStyle = DashStyle.Dash };
             using Pen majorPen = new(Settings.MajorGridColor, 1) { DashStyle = DashStyle.Dash };
@@ -138,7 +200,7 @@ namespace SharpGraph.Cartesian
             DrawGridLines(g, mapper, true, majorGridSpacingX, majorPen, false);
             DrawGridLines(g, mapper, true, majorGridSpacingY, majorPen, true);
 
-            static void DrawGridLines(Graphics g, Coordinate m, bool major, float gridSpacing, Pen pen, bool horizontal)
+            static void DrawGridLines(Graphics g, GraphCoordinate m, bool major, float gridSpacing, Pen pen, bool horizontal)
             {
                 int w = m.ScreenWidth;
                 int h = m.ScreenHeight;
@@ -189,7 +251,7 @@ namespace SharpGraph.Cartesian
         /// </summary>
         /// <param name="g"></param>
         /// <param name="mapper"></param>
-        public static void Axes(Graphics g, Coordinate mapper)
+        public static void Axes(Graphics g, GraphCoordinate mapper)
         {
             using Pen axisPen = new(Settings.AxisColor, 2);
 
