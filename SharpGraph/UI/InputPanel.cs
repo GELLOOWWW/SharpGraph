@@ -1,42 +1,31 @@
-﻿using System;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SharpGraph.Expressions;
+﻿using SharpGraph.Expressions;
+using System;
 
 namespace SharpGraph.UI
 {
-    /// <summary>
-    /// Represents a panel for inputting and displaying mathematical expressions.
-    /// </summary>
     public class InputPanel
     {
         private readonly Panel container;
         private readonly RichTextBox txtbxInput = new();
         private readonly Button btnAdd = new();
+        private readonly Button inputColorButton = new();
         private readonly TableLayoutPanel tblExprList = new();
         private readonly int expressionLimit;
 
-        /// <summary>
-        /// Event triggered when an expression is submitted.
-        /// </summary>
-        public event Func<string, Task>? ExpressionSubmitted;
+        public event Func<string, Color, Task>? ExpressionSubmitted;
+        public event Action<int>? ExpressionRemoved;
+        public event Action<int, ParsedExpression>? ExpressionModified;
 
-        /// <summary>
-        /// Event triggered when an expression is removed.
-        /// </summary>
-        public event Action<string>? ExpressionRemoved;
+        private const int RowHeight = 35;
+        private Color currentInputColor = Color.Blue;
 
-        /// <summary>
-        /// Initializes a new instance of the InputPanel class.
-        /// </summary>
-        /// <param name="panel">The parent panel to contain the input controls.</param>
-        /// <param name="limit">The maximum number of expressions allowed.</param>
+        // Keep track of expression rows with expressions and UI controls
+        private readonly List<(TextBox TextBox, Button ColorBtn, Button RemoveBtn, Color SelectedColor, string ExpressionText)> expressionRows = new();
+
         public InputPanel(Panel panel, int limit = 8)
         {
-            this.container = panel ?? throw new ArgumentNullException(nameof(panel));
-            this.expressionLimit = limit;
-
+            container = panel ?? throw new ArgumentNullException(nameof(panel));
+            expressionLimit = limit;
             InitializeComponents();
         }
 
@@ -45,109 +34,269 @@ namespace SharpGraph.UI
             container.Controls.Clear();
             container.AutoScroll = true;
 
-            // TableLayoutPanel for expressions
             tblExprList.Dock = DockStyle.Fill;
-            tblExprList.AutoScroll = true;
-            tblExprList.ColumnCount = 2;
+            tblExprList.ColumnCount = 3;
             tblExprList.RowCount = 0;
-            // Set fixed width for button column (30px) and fixed or percentage width for label column
             tblExprList.ColumnStyles.Clear();
-            // Label column fixed width, e.g., 250 px (adjust as needed)
-            tblExprList.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 250F));
-            // Button column fixed width
-            tblExprList.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
+            tblExprList.RowStyles.Clear();
+            tblExprList.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
+            tblExprList.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tblExprList.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 50F));
             container.Controls.Add(tblExprList);
-            // Input box
-            txtbxInput.Height = 28;
-            txtbxInput.Font = Settings.FontDefault;
-            txtbxInput.Dock = DockStyle.Top;
-            txtbxInput.KeyDown += InputBox_KeyDown;
-            tblExprList.Controls.Add(txtbxInput);
-            // Add button
-            btnAdd.Text = "+";
-            btnAdd.Width = 32;
-            btnAdd.Height = 28;
-            btnAdd.Dock = DockStyle.Top;
-            btnAdd.Click += async (_, _) => await SubmitExpressionAsync();
-            tblExprList.Controls.Add(btnAdd);
+
+            AddInputRow();
+            AddFillerRow();
         }
+
+        private void AddInputRow()
+        {
+            int idx = tblExprList.RowCount++;
+            tblExprList.RowStyles.Add(new RowStyle(SizeType.Absolute, RowHeight));
+
+            inputColorButton.BackColor = currentInputColor;
+            inputColorButton.Dock = DockStyle.Fill;
+            inputColorButton.Margin = new Padding(5);
+            inputColorButton.FlatStyle = FlatStyle.Flat;
+            inputColorButton.FlatAppearance.BorderSize = 0;
+            inputColorButton.TabStop = false;
+            inputColorButton.Click += (s, e) => ChangeInputColor();
+
+            tblExprList.Controls.Add(inputColorButton, 0, idx);
+
+            txtbxInput.Font = SystemFonts.DefaultFont;
+            txtbxInput.Dock = DockStyle.Fill;
+            txtbxInput.Margin = new Padding(3, 5, 3, 5);
+            txtbxInput.KeyDown += InputBox_KeyDown;
+            tblExprList.Controls.Add(txtbxInput, 1, idx);
+
+            btnAdd.Text = "+";
+            btnAdd.Dock = DockStyle.Fill;
+            btnAdd.Margin = new Padding(3, 5, 3, 5);
+            btnAdd.Click += async (_, _) => await SubmitExpressionAsync();
+            tblExprList.Controls.Add(btnAdd, 2, idx);
+        }
+
+        private void ChangeInputColor()
+        {
+            using var dlg = new ColorDialog { Color = inputColorButton.BackColor };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                currentInputColor = dlg.Color;
+                inputColorButton.BackColor = dlg.Color;
+            }
+        }
+
         private async Task SubmitExpressionAsync()
         {
-            string expression = txtbxInput.Text.Trim();
-            if (string.IsNullOrWhiteSpace(expression) || tblExprList.RowCount >= expressionLimit)
+            string expr = txtbxInput.Text.Trim();
+            if (string.IsNullOrWhiteSpace(expr) || expressionRows.Count >= expressionLimit)
                 return;
 
-            var result = await ExpressionParser.TryParseAsync(expression);
-            if (!result.IsValid)
+            var parseResult = await ExpressionParser.TryParseAsync(expr, GetColorForExpression(expr));
+            if (!parseResult.IsValid)
             {
                 txtbxInput.BackColor = Color.MistyRose;
                 return;
             }
-
             txtbxInput.BackColor = SystemColors.Window;
             txtbxInput.Clear();
 
-            AddExpressionRow(expression);
+            RemoveFillerRow();
+            AddExpressionRow(expr, currentInputColor);
+            AddFillerRow();
+
             if (ExpressionSubmitted != null)
-                await ExpressionSubmitted.Invoke(expression);
+                await ExpressionSubmitted(expr, currentInputColor);
+
+            // Set inputColorButton to a new random color from the settings
+            SetRandomInputColor();
         }
 
-        private void AddExpressionRow(string expression)
+        private void AddExpressionRow(string expr, Color color)
         {
-            // Add a new row
-            int rowIndex = tblExprList.RowCount++;
-            tblExprList.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
-            // Create label
-            var label = new Label
+            int rowIndex = HasFillerRow() ? tblExprList.RowCount - 1 : tblExprList.RowCount;
+
+            tblExprList.RowCount++;
+            tblExprList.RowStyles.Insert(rowIndex, new RowStyle(SizeType.Absolute, RowHeight));
+
+            foreach (Control c in tblExprList.Controls)
+                if (tblExprList.GetRow(c) >= rowIndex)
+                    tblExprList.SetRow(c, tblExprList.GetRow(c) + 1);
+
+            var colorBtn = new Button
             {
-                Text = expression,
-                AutoEllipsis = true,
-                MaximumSize = new Size(245, 0), // Slightly less than column width to avoid clipping
+                BackColor = color,
                 Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleLeft,
-                Margin = new Padding(3, 5, 3, 5)
+                Margin = new Padding(5),
+                FlatStyle = FlatStyle.Flat,
+                TabStop = false,
             };
-            tblExprList.Controls.Add(label, 0, rowIndex);
-            // Create remove button
-            var removeButton = new Button
+            colorBtn.FlatAppearance.BorderSize = 0;
+            colorBtn.Click += (s, e) => ChangeColor_Click(s, e, colorBtn);
+            tblExprList.Controls.Add(colorBtn, 0, rowIndex);
+
+            var textBox = new TextBox
+            {
+                Text = expr,
+                Dock = DockStyle.Fill,
+                Margin = new Padding(3, 5, 3, 5),
+                Tag = rowIndex // store row index in Tag
+            };
+            textBox.TextChanged += (s, e) =>
+            {
+                if (s is TextBox tb && tb.Tag is int idx)
+                {
+                    UpdateExpression(idx, tb.Text);
+                }
+            };
+            tblExprList.Controls.Add(textBox, 1, rowIndex);
+
+            var rmBtn = new Button
             {
                 Text = "X",
                 Dock = DockStyle.Fill,
-                Margin = new Padding(0)
+                Margin = new Padding(3, 5, 3, 5),
+                TabStop = false,
+                Tag = rowIndex,
             };
-            removeButton.Click += (_, _) =>
-            {
-                RemoveExpressionRow(label, removeButton);
-                ExpressionRemoved?.Invoke(expression);
-            };
-            tblExprList.Controls.Add(removeButton, 1, rowIndex);
-        }
-        private void RemoveExpressionRow(Control label, Control button)
-        {
-            int rowIndex = tblExprList.GetRow(label);
+            tblExprList.Controls.Add(rmBtn, 2, rowIndex);
 
-            // Remove controls for the row
-            tblExprList.Controls.Remove(label);
-            tblExprList.Controls.Remove(button);
-
-            // Shift rows above up
-            for (int i = rowIndex + 1; i < tblExprList.RowCount; i++)
+            expressionRows.Add((textBox, colorBtn, rmBtn, color, expr));
+            rmBtn.Click += (s, e) =>
             {
-                foreach (Control ctrl in tblExprList.Controls)
+                if (s is Button btn && btn.Tag is int idx)
                 {
-                    if (tblExprList.GetRow(ctrl) == i)
+                    RemoveExpressionRow(expressionRows[idx]);
+                }
+            };
+
+            UpdateBoxTags();
+        }
+
+        private async void UpdateExpression(int index, string newExpression)
+        {
+            if (index < 0 || index >= expressionRows.Count) return;
+
+            using var updateCts = new CancellationTokenSource();
+            var token = updateCts.Token;
+
+            var (textBox, colorBtn, removeBtn, selectedColor, _) = expressionRows[index];
+            expressionRows[index] = (textBox, colorBtn, removeBtn, selectedColor, newExpression);
+
+            try
+            {
+                await Task.Delay(50, token); // slight delay for when user is typing
+
+                var parsedNewExpr = await ExpressionParser.TryParseAsync(newExpression, GetColorForExpression(newExpression));
+                if (!parsedNewExpr.IsValid)
+                {
+                    textBox.BackColor = Settings.ErrorColor;
+                }
+                else
+                {
+                    ExpressionModified?.Invoke(index, parsedNewExpr);
+                    textBox.BackColor = Settings.BgColor;
+                }
+            } catch {  } // ignore cancellation, because most likely user is still typing
+        }
+
+        private void RemoveExpressionRow((TextBox TextBox, Button ColorBtn, Button RemoveBtn, Color SelectedColor, string ExpressionText) row)
+        {
+            int index = expressionRows.IndexOf(row);
+            if (index == -1) return;
+            int rIdx = tblExprList.GetRow(row.TextBox);
+
+            tblExprList.Controls.Remove(row.TextBox);
+            tblExprList.Controls.Remove(row.ColorBtn);
+            tblExprList.Controls.Remove(row.RemoveBtn);
+
+            ExpressionRemoved?.Invoke(index);
+            expressionRows.RemoveAt(index);
+
+            for (int i = 0; i < tblExprList.Controls.Count; i++)
+            {
+                var ctrl = tblExprList.Controls[i];
+                int r = tblExprList.GetRow(ctrl);
+                if (r > rIdx)
+                    tblExprList.SetRow(ctrl, r - 1);
+            }
+
+            if (tblExprList.RowStyles.Count > rIdx)
+            {
+                tblExprList.RowStyles.RemoveAt(rIdx);
+                tblExprList.RowCount--;
+            }
+
+            UpdateBoxTags();
+        }
+
+        private void UpdateBoxTags()
+        {
+            for (int i = 0; i < expressionRows.Count; i++)
+            {
+                expressionRows[i].TextBox.Tag = i;
+                expressionRows[i].RemoveBtn.Tag = i;
+            }
+        }
+
+        private void SetRandomInputColor()
+        {
+            var random = new Random();
+            if (Settings.ExpressionColors == null || Settings.ExpressionColors.Count == 0)
+                return;
+            int index = random.Next(Settings.ExpressionColors.Count);
+            currentInputColor = Settings.ExpressionColors[index];
+            inputColorButton.BackColor = currentInputColor;
+        }
+
+        private async void ChangeColor_Click(object? sender, EventArgs e, Button colorBtn)
+        {
+            using var dlg = new ColorDialog { Color = colorBtn.BackColor };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                colorBtn.BackColor = dlg.Color;
+                for (int i = 0; i < expressionRows.Count; i++)
+                {
+                    if (expressionRows[i].ColorBtn == colorBtn)
                     {
-                        tblExprList.SetRow(ctrl, i - 1);
+                        expressionRows[i] = (expressionRows[i].TextBox, colorBtn, expressionRows[i].RemoveBtn, dlg.Color, expressionRows[i].ExpressionText);
+                        var parsedExpr = await ExpressionParser.TryParseAsync(expressionRows[i].ExpressionText, dlg.Color);
+                        ExpressionModified?.Invoke(i, parsedExpr);
+                        break;
                     }
                 }
             }
+        }
 
-            // Remove last row style and decrease count
-            if (tblExprList.RowCount > 0)
-            {
-                tblExprList.RowStyles.RemoveAt(tblExprList.RowCount - 1);
-                tblExprList.RowCount--;
-            }
+        private bool HasFillerRow()
+        {
+            if (tblExprList.RowCount == 0) return false;
+            var style = tblExprList.RowStyles[tblExprList.RowCount - 1];
+            return style.SizeType == SizeType.Percent && Math.Abs(style.Height - 100f) < 0.1f;
+        }
+
+        private void AddFillerRow()
+        {
+            if (HasFillerRow()) return;
+            tblExprList.RowCount++;
+            tblExprList.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            var p = new Panel { Dock = DockStyle.Fill, Margin = Padding.Empty, BackColor = Color.Transparent };
+            tblExprList.Controls.Add(p, 0, tblExprList.RowCount - 1);
+            tblExprList.SetColumnSpan(p, 3);
+        }
+
+        private void RemoveFillerRow()
+        {
+            if (!HasFillerRow()) return;
+            int idx = tblExprList.RowCount - 1;
+            Control? filler = null;
+            foreach (Control c in tblExprList.Controls)
+                if (tblExprList.GetRow(c) == idx && tblExprList.GetColumnSpan(c) == 3)
+                    filler = c;
+            if (filler != null)
+                tblExprList.Controls.Remove(filler);
+            tblExprList.RowStyles.RemoveAt(idx);
+            tblExprList.RowCount--;
         }
 
         private async void InputBox_KeyDown(object? sender, KeyEventArgs e)
@@ -157,6 +306,16 @@ namespace SharpGraph.UI
                 e.SuppressKeyPress = true;
                 await SubmitExpressionAsync();
             }
+        }
+
+        public Color GetColorForExpression(string expression)
+        {
+            foreach (var row in expressionRows)
+            {
+                if (row.TextBox.Text == expression)
+                    return row.SelectedColor;
+            }
+            return Color.Empty;
         }
     }
 }

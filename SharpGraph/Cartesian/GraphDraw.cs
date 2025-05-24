@@ -1,5 +1,3 @@
-using System;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 using SharpGraph.Expressions;
 
@@ -13,9 +11,10 @@ namespace SharpGraph.Cartesian
         /// </summary>
         /// <param name="mapper">Coordinate mapper defining the Cartesian coordinate system and screen dimensions.</param>
         /// <param name="expr">Parsed expression representing f(x, y).</param>
+        /// <param name="color">Color the graph will be in.</param>
         /// <param name="step">Step size in pixels between sampling points for the Marching Squares grid.</param>
         /// <returns>A Task representing the asynchronous operation, with a Bitmap result containing the graph image.</returns>
-        public static async Task<Bitmap> GraphAsync(GraphCoordinate mapper, ParsedExpression expr, int step = 2)
+        public static async Task<Bitmap> Graph(GraphCoordinate mapper, ParsedExpression expr, int step = 1)
         {
             // Validate input arguments: ensure mapper is not null,
             // step is positive, and expression has a compiled function
@@ -34,9 +33,8 @@ namespace SharpGraph.Cartesian
 
             // 2D arrays to hold function evaluations and their validity status
             double[,] values = new double[xCount, yCount];
-            bool[,] valid = new bool[xCount, yCount]; // Tracks if function value is finite
 
-            // Compute function values asynchronously and in parallel for efficiency
+            // Compute function values asynchronously and in parallel
             await Task.Run(() =>
             {
                 Parallel.For(0, xCount, gx =>
@@ -55,31 +53,22 @@ namespace SharpGraph.Cartesian
                             // Evaluate the expression at (x, y)
                             double result = expr.CompiledFunction(x, y);
                             values[gx, gy] = result;
-
-                            // Mark the value as valid only if it is a finite number
-                            valid[gx, gy] = !double.IsNaN(result) && !double.IsInfinity(result);
                         }
                         catch
                         {
                             // On exceptions, mark as invalid and assign 0 for safety
                             values[gx, gy] = 0;
-                            valid[gx, gy] = false;
                         }
                     }
                 });
             });
 
-            // Create a bitmap image of the specified screen dimensions
             var bitmap = new Bitmap(width, height);
-
-            // Prepare graphics object for drawing on the bitmap
             using var g = Graphics.FromImage(bitmap);
-            using var pen = new Pen(Color.Blue, 2f); // Blue pen, 2 pixels wide
+            Color graphColor = expr.FunctionColor;
+            using Pen pen = new(graphColor, 2f);
 
-            // Enable anti-aliasing to produce smooth contour lines
             g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Start with a clean transparent canvas
             g.Clear(Color.Transparent);
 
             // Local helper to interpolate contour crossing point along an edge
@@ -109,28 +98,18 @@ namespace SharpGraph.Cartesian
 
                     // Extract corresponding function values at the cell corners
                     double v0 = values[gx, gy];
-                    double v1_ = values[gx + 1, gy];
+                    double v1 = values[gx + 1, gy];
                     double v2 = values[gx + 1, gy + 1];
                     double v3 = values[gx, gy + 1];
 
-                    // Extract validity information to skip invalid cells
-                    bool b0 = valid[gx, gy];
-                    bool b1 = valid[gx + 1, gy];
-                    bool b2 = valid[gx + 1, gy + 1];
-                    bool b3 = valid[gx, gy + 1];
-
-                    // Skip cells with any invalid function value or discontinuity
-                    if (!b0 || !b1 || !b2 || !b3)
-                        continue;
-
                     // Heuristic skip: if difference in values on edges is large, likely discontinuity
-                    if (Math.Abs(v0 - v1_) > 10 || Math.Abs(v1_ - v2) > 10 || Math.Abs(v2 - v3) > 10 || Math.Abs(v3 - v0) > 10)
+                    if (Math.Abs(v0 - v1) > 20 || Math.Abs(v1 - v2) > 20 || Math.Abs(v2 - v3) > 20 || Math.Abs(v3 - v0) > 20)
                         continue;
 
                     // Determine cell state as a 4-bit mask based on sign of corner values
                     int state = 0;
                     if (v0 < 0) state |= 1;
-                    if (v1_ < 0) state |= 2;
+                    if (v1 < 0) state |= 2;
                     if (v2 < 0) state |= 4;
                     if (v3 < 0) state |= 8;
 
@@ -143,34 +122,34 @@ namespace SharpGraph.Cartesian
                             break;
                         case 1:
                         case 14:
-                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p0, p3, v0, v3));
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1), Interpolate(p0, p3, v0, v3));
                             break;
                         case 2:
                         case 13:
-                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p1, p2, v1_, v2));
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1), Interpolate(p1, p2, v1, v2));
                             break;
                         case 3:
                         case 12:
-                            g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p0, p3, v0, v3));
+                            g.DrawLine(pen, Interpolate(p1, p2, v1, v2), Interpolate(p0, p3, v0, v3));
                             break;
                         case 4:
                         case 11:
-                            g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p2, p3, v2, v3));
+                            g.DrawLine(pen, Interpolate(p1, p2, v1, v2), Interpolate(p2, p3, v2, v3));
                             break;
                         case 5:
-                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p0, p3, v0, v3));
-                            g.DrawLine(pen, Interpolate(p1, p2, v1_, v2), Interpolate(p2, p3, v2, v3));
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1), Interpolate(p0, p3, v0, v3));
+                            g.DrawLine(pen, Interpolate(p1, p2, v1, v2), Interpolate(p2, p3, v2, v3));
                             break;
                         case 6:
                         case 9:
-                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1_), Interpolate(p2, p3, v2, v3));
+                            g.DrawLine(pen, Interpolate(p0, p1, v0, v1), Interpolate(p2, p3, v2, v3));
                             break;
                         case 7:
                         case 8:
                             g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p2, p3, v2, v3));
                             break;
                         case 10:
-                            g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p1, p2, v1_, v2));
+                            g.DrawLine(pen, Interpolate(p0, p3, v0, v3), Interpolate(p1, p2, v1, v2));
                             break;
                     }
                 }
@@ -238,8 +217,8 @@ namespace SharpGraph.Cartesian
                         string label = val.ToString("0.##");
                         SizeF size = g.MeasureString(label, labelFont);
                         PointF labelPos = horizontal
-                            ? new PointF(m.MapXToScreen(0) + 2, pos - size.Height / 2)
-                            : new PointF(pos - size.Width / 2, m.MapYToScreen(0) + 2);
+                            ? new PointF(m.MapXToScreen(0) + 2, pos - size.Height / 2) // horizontal gridlines
+                            : new PointF(pos - size.Width / 2, m.MapYToScreen(0) + 2); // vertical
                         g.DrawString(label, labelFont, labelBrush, labelPos);
                     }
                 }

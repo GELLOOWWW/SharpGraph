@@ -1,43 +1,35 @@
 ﻿using SharpGraph.Cartesian;
 using SharpGraph.Expressions;
+using SharpGraph.UI;
 
 namespace SharpGraph
 {
-    public class InitSharpGraph(PictureBox pb)
+    public class InitSharpGraph
     {
-        private readonly PictureBox pbScreen = pb;
-        private GraphRender graph = new(pb);
-
-        /// <summary>
-        /// starts the Graphing screen.
-        /// </summary>
-        /// <param name="pb"></param>
-        public void StartScreen()
+        public static void Start(Panel pnl, PictureBox pb)
         {
-            this.graph = new GraphRender(pbScreen);
-            graph.Start();
-        }
+            // Initialize GraphRender
+            using var graphRender = new GraphRender(pb);
+            graphRender.Start();
+            // Initialize InputPanel
+            var input = new InputPanel(pnl, limit: 10);
+            input.ExpressionSubmitted += OnExpressionSubmit;
+            input.ExpressionRemoved += OnExpressionRemove;
+            input.ExpressionModified += OnExpressionModify;
 
-        /// <summary>
-        /// Starts the panel for expressions input.
-        /// </summary>
-        /// <param name="pnl"></param>
-        public void StartPanel(Panel pnl)
-        {
-            UI.InputPanel input = new(pnl);
-            input.ExpressionSubmitted += async expression =>
+            async Task OnExpressionSubmit(string expression, Color color)
             {
-                var parsed = await ExpressionParser.TryParseAsync(expression);
-                if (parsed.IsValid)
-                {
-                    await graph.AddExpression(parsed);
-                }
-            };
-
-            input.ExpressionRemoved += expression =>
+                var parseResult = await ExpressionParser.TryParseAsync(expression, color);
+                await graphRender.AddExpression(parseResult);
+            }
+           async void OnExpressionRemove(int index)
             {
-                graph.RemoveExpression();
-            };
+                await graphRender.RemoveExpression(index);
+            }
+            async void OnExpressionModify(int i, ParsedExpression newExpr)
+            {
+                await graphRender.ModifyExpression(i, newExpr);
+            }
         }
     }
 }

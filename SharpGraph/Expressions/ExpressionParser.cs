@@ -17,6 +17,11 @@ namespace SharpGraph.Expressions
         public Func<double, double, double>? CompiledFunction { get; init; }
 
         /// <summary>
+        /// Sets the color the expression will be graphed in
+        /// </summary>
+        public Color FunctionColor { get; set; }
+
+        /// <summary>
         /// Gets a value indicating whether the parsed expression is valid (successfully compiled).
         /// </summary>
         public bool IsValid => CompiledFunction != null;
@@ -51,7 +56,7 @@ namespace SharpGraph.Expressions
         /// </summary>
         /// <param name="input">Expression string to parse</param>
         /// <returns>A task producing a ParsedExpression</returns>
-        public static async Task<ParsedExpression> TryParseAsync(string input)
+        public static async Task<ParsedExpression> TryParseAsync(string input, Color expColor)
         {
             return await Task.Run(() =>
             {
@@ -66,7 +71,7 @@ namespace SharpGraph.Expressions
 
                     // Compile the expression tree into a lambda delegate Func<double, double, double>
                     var lambda = Expression.Lambda<Func<double, double, double>>(expr, parser._x, parser._y);
-                    return new ParsedExpression { CompiledFunction = lambda.Compile() };
+                    return new ParsedExpression { CompiledFunction = lambda.Compile(), FunctionColor = expColor };
                 }
                 catch
                 {

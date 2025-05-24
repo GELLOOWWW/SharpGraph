@@ -3,16 +3,24 @@ using SharpGraph.Expressions;
 
 namespace SharpGraph.Cartesian
 {
-    public class GraphRender(PictureBox pb)
+    /// <summary>
+    /// Object for making a PictureBox control a screen for the Graphing calculator.
+    /// </summary>
+    public class GraphRender(PictureBox pb) : IDisposable
     {
-        private readonly PictureBox pbGraph = pb;
+        private readonly PictureBox pbGraph = pb ?? throw new ArgumentNullException(nameof(pb));
         private readonly GraphCoordinate mapper = new();
         private static readonly int step = 1;
 
-        // Store rendered layers
         private readonly List<Bitmap> graphLayers = [];
-        public Stack<ParsedExpression> Expressions = [];
+        private readonly List<ParsedExpression> expressions = [];
 
+        private CancellationTokenSource? refreshCts;
+        private const int ResizeDelay = 50;
+
+        /// <summary>
+        /// Starts rendering of the Graph.
+        /// </summary>
         public void Start()
         {
             pbGraph.Paint += PbGraph_Paint;
@@ -20,31 +28,39 @@ namespace SharpGraph.Cartesian
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
         }
 
+        /// <summary>
+        /// Adds an expression to graph in the graph screen.
+        /// </summary>
         public async Task AddExpression(ParsedExpression exp)
         {
-            if (exp.CompiledFunction is null) return;
+            if (exp?.CompiledFunction == null || !exp.IsValid) return;
 
-            Expressions.Push(exp);
-            mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
-
-            var bmp = await GraphDraw.GraphAsync(mapper, exp, step);
-            graphLayers.Add(bmp);
-
-            Refresh();
+            expressions.Add(exp);
+            await RefreshGraphsAsync();
         }
-        public void RemoveExpression()
+
+        /// <summary>
+        /// Removes an expression from the graph.
+        /// </summary>
+        public async Task RemoveExpression(int index)
         {
-            Expressions.Pop();
-            Refresh();
+            if (index >= expressions.Count) return;
+
+            expressions.RemoveAt(index);
+            await RefreshGraphsAsync();
         }
 
-        /**********************************************************
+        public async Task ModifyExpression(int index, ParsedExpression newExpr)
+        {
+            if (index < 0 || index >= expressions.Count) throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
 
-        **********************************************************/
+            expressions[index] = newExpr ?? throw new ArgumentNullException(nameof(newExpr));
+            await RefreshGraphsAsync();
+        }
 
         private void PbGraph_Paint(object? sender, PaintEventArgs e)
         {
-            var g = e.Graphics;
+            Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.Clear(Settings.BgColor);
 
@@ -57,28 +73,82 @@ namespace SharpGraph.Cartesian
             }
         }
 
-        private void PbGraph_Resize(object? sender, EventArgs e)
+        private async void PbGraph_Resize(object? sender, EventArgs e)
         {
-            Refresh();
+            refreshCts?.Cancel();
+            refreshCts = new CancellationTokenSource();
+            var token = refreshCts.Token;
+
+            try
+            {
+                await Task.Delay(ResizeDelay, token);
+                if (!token.IsCancellationRequested)
+                {
+                    await RefreshGraphsAsync();
+                }
+            } catch (TaskCanceledException) { }
         }
 
-        private async void Refresh()
+        private async Task RefreshGraphsAsync()
         {
-            mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
+            refreshCts?.Cancel();
+            refreshCts = new CancellationTokenSource();
 
-            // Clear old layers and re-render all expressions
+            // Dispose previous bitmaps
             foreach (var bmp in graphLayers)
+            {
                 bmp.Dispose();
+            }
             graphLayers.Clear();
 
-            foreach (var expr in Expressions)
+            mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
+
+            var tmpExpr = expressions;
+            for (int i = 0; i < tmpExpr.Count; i++)
             {
-                if (expr.CompiledFunction is null) continue;
-                var bmp = await GraphDraw.GraphAsync(mapper, expr, step);
+                var expr = tmpExpr[i];
+                if (tmpExpr[i].CompiledFunction == null) continue;
+
+                Bitmap bmp = await GraphDraw.Graph(mapper, expr, step);
                 graphLayers.Add(bmp);
             }
 
             pbGraph.Invalidate();
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    refreshCts?.Cancel();
+                    refreshCts?.Dispose();
+
+                    foreach (var bmp in graphLayers)
+                        bmp.Dispose();
+
+                    graphLayers.Clear();
+                    expressions.Clear();
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        ~GraphRender()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

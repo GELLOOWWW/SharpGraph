@@ -9,6 +9,8 @@ namespace SharpGraph
 
         public static Color FgColor { get; set; }
 
+        public static Color ErrorColor { get; set; }
+
         /// <summary>
         /// Color used for major grid lines.
         /// </summary>
@@ -46,6 +48,9 @@ namespace SharpGraph
         {
             BgColor = Color.White;
             FgColor = Color.Black;
+
+            ErrorColor = Color.MistyRose;
+
             MajorGridColor = Color.DarkGray;
             MinorGridColor = Color.LightGray;
             AxisColor = Color.Black;
@@ -58,7 +63,8 @@ namespace SharpGraph
                 Color.Orange,
                 Color.Purple,
                 Color.Brown,
-                Color.Magenta
+                Color.Magenta,
+                Color.Violet,
             ];
 
             MajorGridLines = true;
