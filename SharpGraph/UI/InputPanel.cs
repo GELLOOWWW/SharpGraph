@@ -1,5 +1,4 @@
 ﻿using SharpGraph.Expressions;
-using System;
 
 namespace SharpGraph.UI
 {
@@ -16,11 +15,11 @@ namespace SharpGraph.UI
         public event Action<int>? ExpressionRemoved;
         public event Action<int, ParsedExpression>? ExpressionModified;
 
-        private const int RowHeight = 35;
+        private readonly int RowHeight = Settings.Scale(45);
         private Color currentInputColor = Color.Blue;
 
         // Keep track of expression rows with expressions and UI controls
-        private readonly List<(TextBox TextBox, Button ColorBtn, Button RemoveBtn, Color SelectedColor, string ExpressionText)> expressionRows = new();
+        private readonly List<(RichTextBox TextBox, Button ColorBtn, Button RemoveBtn, Color SelectedColor, string ExpressionText)> expressionRows = [];
 
         public InputPanel(Panel panel, int limit = 8)
         {
@@ -32,6 +31,7 @@ namespace SharpGraph.UI
         private void InitializeComponents()
         {
             container.Controls.Clear();
+            container.BackColor = Color.LightGray;
             container.AutoScroll = true;
 
             tblExprList.Dock = DockStyle.Fill;
@@ -48,6 +48,7 @@ namespace SharpGraph.UI
             AddFillerRow();
         }
 
+
         private void AddInputRow()
         {
             int idx = tblExprList.RowCount++;
@@ -63,14 +64,17 @@ namespace SharpGraph.UI
 
             tblExprList.Controls.Add(inputColorButton, 0, idx);
 
-            txtbxInput.Font = SystemFonts.DefaultFont;
+            txtbxInput.Font = Settings.ExpressionFont;
+            txtbxInput.BorderStyle = BorderStyle.FixedSingle;
             txtbxInput.Dock = DockStyle.Fill;
             txtbxInput.Margin = new Padding(3, 5, 3, 5);
             txtbxInput.KeyDown += InputBox_KeyDown;
             tblExprList.Controls.Add(txtbxInput, 1, idx);
 
-            btnAdd.Text = "+";
+            btnAdd.Text = "➕";
             btnAdd.Dock = DockStyle.Fill;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.BackColor = Color.LightGreen;
             btnAdd.Margin = new Padding(3, 5, 3, 5);
             btnAdd.Click += async (_, _) => await SubmitExpressionAsync();
             tblExprList.Controls.Add(btnAdd, 2, idx);
@@ -123,7 +127,7 @@ namespace SharpGraph.UI
                 if (tblExprList.GetRow(c) >= rowIndex)
                     tblExprList.SetRow(c, tblExprList.GetRow(c) + 1);
 
-            var colorBtn = new Button
+            var btnColor = new Button
             {
                 BackColor = color,
                 Dock = DockStyle.Fill,
@@ -131,38 +135,44 @@ namespace SharpGraph.UI
                 FlatStyle = FlatStyle.Flat,
                 TabStop = false,
             };
-            colorBtn.FlatAppearance.BorderSize = 0;
-            colorBtn.Click += (s, e) => ChangeColor_Click(s, e, colorBtn);
-            tblExprList.Controls.Add(colorBtn, 0, rowIndex);
+            btnColor.FlatAppearance.BorderSize = 0;
+            btnColor.Click += (s, e) => ChangeColor_Click(s, e, btnColor);
+            tblExprList.Controls.Add(btnColor, 0, rowIndex);
 
-            var textBox = new TextBox
+            var rtxbxExpr = new RichTextBox
             {
                 Text = expr,
+                Font = Settings.ExpressionFont,
+                BorderStyle = BorderStyle.None,
                 Dock = DockStyle.Fill,
                 Margin = new Padding(3, 5, 3, 5),
+                Multiline = false,
+                AcceptsTab = false,
                 Tag = rowIndex // store row index in Tag
             };
-            textBox.TextChanged += (s, e) =>
+            rtxbxExpr.TextChanged += (s, e) =>
             {
-                if (s is TextBox tb && tb.Tag is int idx)
+                if (s is RichTextBox tb && tb.Tag is int idx)
                 {
                     UpdateExpression(idx, tb.Text);
                 }
             };
-            tblExprList.Controls.Add(textBox, 1, rowIndex);
+            tblExprList.Controls.Add(rtxbxExpr, 1, rowIndex);
 
-            var rmBtn = new Button
+            var btnRemove = new Button
             {
-                Text = "X",
+                Text = "❌",
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.Red,
                 Dock = DockStyle.Fill,
                 Margin = new Padding(3, 5, 3, 5),
                 TabStop = false,
                 Tag = rowIndex,
             };
-            tblExprList.Controls.Add(rmBtn, 2, rowIndex);
+            tblExprList.Controls.Add(btnRemove, 2, rowIndex);
 
-            expressionRows.Add((textBox, colorBtn, rmBtn, color, expr));
-            rmBtn.Click += (s, e) =>
+            expressionRows.Add((rtxbxExpr, btnColor, btnRemove, color, expr));
+            btnRemove.Click += (s, e) =>
             {
                 if (s is Button btn && btn.Tag is int idx)
                 {
@@ -173,19 +183,16 @@ namespace SharpGraph.UI
             UpdateBoxTags();
         }
 
-        private async void UpdateExpression(int index, string newExpression)
+        private async void UpdateExpression(int i, string newExpression)
         {
-            if (index < 0 || index >= expressionRows.Count) return;
+            if (i < 0 || i >= expressionRows.Count) return;
 
-            using var updateCts = new CancellationTokenSource();
-            var token = updateCts.Token;
-
-            var (textBox, colorBtn, removeBtn, selectedColor, _) = expressionRows[index];
-            expressionRows[index] = (textBox, colorBtn, removeBtn, selectedColor, newExpression);
+            var (textBox, colorBtn, removeBtn, selectedColor, _) = expressionRows[i];
+            expressionRows[i] = (textBox, colorBtn, removeBtn, selectedColor, newExpression);
 
             try
             {
-                await Task.Delay(50, token); // slight delay for when user is typing
+                await Task.Delay(50); // slight delay for when user is typing
 
                 var parsedNewExpr = await ExpressionParser.TryParseAsync(newExpression, GetColorForExpression(newExpression));
                 if (!parsedNewExpr.IsValid)
@@ -194,13 +201,13 @@ namespace SharpGraph.UI
                 }
                 else
                 {
-                    ExpressionModified?.Invoke(index, parsedNewExpr);
+                    ExpressionModified?.Invoke(i, parsedNewExpr);
                     textBox.BackColor = Settings.BgColor;
                 }
             } catch {  } // ignore cancellation, because most likely user is still typing
         }
 
-        private void RemoveExpressionRow((TextBox TextBox, Button ColorBtn, Button RemoveBtn, Color SelectedColor, string ExpressionText) row)
+        private void RemoveExpressionRow((RichTextBox TextBox, Button ColorBtn, Button RemoveBtn, Color SelectedColor, string ExpressionText) row)
         {
             int index = expressionRows.IndexOf(row);
             if (index == -1) return;

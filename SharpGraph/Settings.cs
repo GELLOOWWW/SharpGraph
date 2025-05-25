@@ -9,6 +9,8 @@ namespace SharpGraph
 
         public static Color FgColor { get; set; }
 
+        public static Color ControlColor { get; set; }
+
         public static Color ErrorColor { get; set; }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace SharpGraph
         public static bool MinorGridLines { get; set; }
 
         public static Font FontDefault { get; set; }
+        public static Font ExpressionFont {  get; set; }
 
         // Static constructor to initialize default settings
         static Settings()
@@ -71,6 +74,16 @@ namespace SharpGraph
             MinorGridLines = true;
 
             FontDefault = new("Arial", 8);
+            ExpressionFont = new("Segui UI", 12);
+            ControlColor = Color.DarkGray;
+        }
+        /// <summary>
+        /// Scales a base value according to current system DPI.
+        /// </summary>
+        public static int Scale(float baseValue)
+        {
+            using var g = Graphics.FromHwnd(IntPtr.Zero);
+            return (int)(baseValue * g.DpiX / 96f);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace SharpGraph.Expressions
 {
@@ -195,7 +194,7 @@ namespace SharpGraph.Expressions
         /// <summary>
         /// Parses numeric literals (integer or floating-point).
         /// </summary>
-        private Expression ParseNumber()
+        private ConstantExpression ParseNumber()
         {
             int start = _pos;
             bool hasDecimal = false;
@@ -207,7 +206,7 @@ namespace SharpGraph.Expressions
                 _pos++;
             }
 
-            string numStr = _input.Substring(start, _pos - start);
+            string numStr = _input[start.._pos];
 
             if (double.TryParse(numStr, NumberStyles.Float, CultureInfo.InvariantCulture, out double value))
                 return Expression.Constant(value);
@@ -225,7 +224,7 @@ namespace SharpGraph.Expressions
             while (_pos < _input.Length && char.IsLetter(_input[_pos]))
                 _pos++;
 
-            string ident = _input.Substring(start, _pos - start);
+            string ident = _input[start.._pos];
 
             // Match known variables and constants
             return ident switch

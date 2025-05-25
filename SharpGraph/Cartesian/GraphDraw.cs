@@ -162,8 +162,6 @@ namespace SharpGraph.Cartesian
         /// Draws minor and major grids in a Graphics object.
         /// </summary>
         /// <remarks>grid spacing is handled by the Coordinate object.</remarks>
-        /// <param name="g"></param>
-        /// <param name="mapper"></param>
         public static void Grids(Graphics g, GraphCoordinate mapper)
         {
             using Pen minorPen = new(Settings.MinorGridColor, 1) { DashStyle = DashStyle.Dash };
@@ -228,8 +226,6 @@ namespace SharpGraph.Cartesian
         /// <summary>
         /// Draws the x and y axes in a Graphics object
         /// </summary>
-        /// <param name="g"></param>
-        /// <param name="mapper"></param>
         public static void Axes(Graphics g, GraphCoordinate mapper)
         {
             using Pen axisPen = new(Settings.AxisColor, 2);

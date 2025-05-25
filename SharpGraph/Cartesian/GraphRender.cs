@@ -6,7 +6,7 @@ namespace SharpGraph.Cartesian
     /// <summary>
     /// Object for making a PictureBox control a screen for the Graphing calculator.
     /// </summary>
-    public class GraphRender(PictureBox pb) : IDisposable
+    public class GraphRender(PictureBox pb)
     {
         private readonly PictureBox pbGraph = pb ?? throw new ArgumentNullException(nameof(pb));
         private readonly GraphCoordinate mapper = new();
@@ -50,6 +50,11 @@ namespace SharpGraph.Cartesian
             await RefreshGraphsAsync();
         }
 
+        /// <summary>
+        /// Modifies an expression from the graph.
+        /// </summary>
+        /// <param name="index">the expression's index in the graph list.</param>
+        /// <param name="newExpr">the new expression that will replace the previous graph.</param>
         public async Task ModifyExpression(int index, ParsedExpression newExpr)
         {
             if (index < 0 || index >= expressions.Count) throw new ArgumentOutOfRangeException(nameof(index), "Index out of range.");
@@ -115,40 +120,5 @@ namespace SharpGraph.Cartesian
 
             pbGraph.Invalidate();
         }
-
-        #region IDisposable Support
-        private bool disposedValue = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    refreshCts?.Cancel();
-                    refreshCts?.Dispose();
-
-                    foreach (var bmp in graphLayers)
-                        bmp.Dispose();
-
-                    graphLayers.Clear();
-                    expressions.Clear();
-                }
-
-                disposedValue = true;
-            }
-        }
-
-        ~GraphRender()
-        {
-            Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
     }
 }
