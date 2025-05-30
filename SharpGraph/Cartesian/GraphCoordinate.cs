@@ -1,6 +1,5 @@
 namespace SharpGraph.Cartesian
 {
-    //
     public class GraphCoordinate
     {
         public float xMin, xMax, yMin, yMax;
@@ -64,14 +63,10 @@ namespace SharpGraph.Cartesian
             float residual = approxSpacing / magnitude;
 
             float niceResidual;
-            if (residual < 1.5)
-                niceResidual = 1;
-            else if (residual < 3)
-                niceResidual = 2;
-            else if (residual < 7)
-                niceResidual = 5;
-            else
-                niceResidual = 10;
+            if (residual < 1.5)    niceResidual = 1;
+            else if (residual < 3) niceResidual = 2;
+            else if (residual < 7) niceResidual = 5;
+            else                   niceResidual = 10;
 
             return niceResidual * magnitude;
         }
