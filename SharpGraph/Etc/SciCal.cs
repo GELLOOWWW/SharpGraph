@@ -3,8 +3,7 @@
     public partial class SciCal : Form
     {
         double dFirstVal, dSecondVal;
-        string op;
-        bool sideBarExpand;
+        string? op;
         public SciCal()
         {
             InitializeComponent();

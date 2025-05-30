@@ -7,10 +7,10 @@ namespace SharpGraph.UI
     /// </summary>
     public class MenuPanel : UserControl
     {
-        private ToolStrip toolStrip;
-        private ToolStripDropDownButton formsDropDownButton;
-        private ToolStripDropDownButton settingsDropDownButton;
-        private ToolStripDropDownButton aboutDropDownButton;
+        private ToolStrip? toolStrip;
+        private ToolStripDropDownButton? formsDropDownButton;
+        private ToolStripDropDownButton? settingsDropDownButton;
+        private ToolStripDropDownButton? aboutDropDownButton;
 
         public MenuPanel()
         {
