@@ -16,7 +16,7 @@ namespace SharpGraph.Cartesian
         private readonly List<ParsedExpression> expressions = [];
 
         private CancellationTokenSource? refreshCts;
-        private const int ResizeDelay = 50;
+        private const int ResizeDelay = 20;
 
         /// <summary>
         /// Starts rendering of the Graph.
@@ -105,7 +105,6 @@ namespace SharpGraph.Cartesian
                 bmp.Dispose();
             }
             graphLayers.Clear();
-
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
 
             var tmpExpr = expressions;

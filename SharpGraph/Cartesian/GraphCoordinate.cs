@@ -9,9 +9,6 @@ namespace SharpGraph.Cartesian
         /// <summary>
         /// Initialize a new Coordinate System object.
         /// </summary>
-        /// <param name="padding"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
         public void UpdateMap(int width, int height)
         {
             this.ScreenWidth = width;
@@ -21,9 +18,32 @@ namespace SharpGraph.Cartesian
         }
 
         /// <summary>
+        /// Maps x-coordinate to pixel.
+        /// </summary>
+        public int MapXToScreen(float x)
+            => (int)((x - xMin) / (xMax - xMin) * (ScreenWidth - 2));
+
+        /// <summary>
+        /// Maps y-coordinate to pixel.
+        /// </summary>
+        public int MapYToScreen(float y)
+            => (int)((yMax - y) / (yMax - yMin) * (ScreenHeight - 2));
+
+        /// <summary>
+        /// Maps screen x-coordinate to coordinate system.
+        /// </summary>
+        public double MapScreenToX(int px)
+            => xMin + px * (xMax - xMin) / (ScreenWidth - 2);
+
+        /// <summary>
+        /// maps screen y-coordinate to coordinate system.
+        /// </summary>
+        public double MapScreenToY(int py)
+            => yMax - py * (yMax - yMin) / (ScreenHeight - 2);
+
+        /// <summary>
         /// Calculate Minimum and Maximum X and Y Cartesian Coordinates.
         /// </summary>
-        /// <param name="unitsPerPixel"></param>
         public void CalculateBounds(float unitsPerPixel = 0.025f)
         {
             xMin = -((ScreenWidth - 2) * unitsPerPixel) / 2;
@@ -40,19 +60,6 @@ namespace SharpGraph.Cartesian
         {
             return CalcGridSpacing(yMin, yMax, ScreenHeight - 2, targetPixelsPerGrid);
         }
-
-        public int MapXToScreen(float x)
-            => (int)((x - xMin) / (xMax - xMin) * (ScreenWidth - 2));
-
-        public int MapYToScreen(float y)
-            => (int)((yMax - y) / (yMax - yMin) * (ScreenHeight - 2));
-
-        public double MapScreenToX(int px)
-            => xMin + px * (xMax - xMin) / (ScreenWidth - 2);
-
-        public double MapScreenToY(int py)
-            => yMax - py * (yMax - yMin) / (ScreenHeight - 2);
-
         public static float CalcGridSpacing(float min, float max, int screenSize, int targetPixelsPerGrid = 40)
         {
             float range = max - min;
@@ -63,10 +70,10 @@ namespace SharpGraph.Cartesian
             float residual = approxSpacing / magnitude;
 
             float niceResidual;
-            if (residual < 1.5)    niceResidual = 1;
-            else if (residual < 3) niceResidual = 2;
-            else if (residual < 7) niceResidual = 5;
-            else                   niceResidual = 10;
+            if (residual < 1.5)     niceResidual = 1;
+            else if (residual < 3)  niceResidual = 2;
+            else if (residual < 7)  niceResidual = 5;
+            else                    niceResidual = 10;
 
             return niceResidual * magnitude;
         }

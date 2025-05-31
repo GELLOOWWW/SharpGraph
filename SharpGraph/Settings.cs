@@ -2,16 +2,14 @@ namespace SharpGraph
 {
     public static class Settings
     {
+        public static Color FgColor { get; set; }
+        public static Color ControlColor { get; set; }
+        public static Color ErrorColor { get; set; }
+
         /// <summary>
         /// Background color of the graph area.
         /// </summary>
         public static Color BgColor { get; set; }
-
-        public static Color FgColor { get; set; }
-
-        public static Color ControlColor { get; set; }
-
-        public static Color ErrorColor { get; set; }
 
         /// <summary>
         /// Color used for major grid lines.
@@ -61,13 +59,12 @@ namespace SharpGraph
             ExpressionColors =
             [
                 Color.Red,
-                Color.Blue,
                 Color.Green,
-                Color.Orange,
+                Color.Blue,
                 Color.Purple,
-                Color.Brown,
-                Color.Magenta,
-                Color.Violet,
+                Color.Orange,
+                Color.Yellow,
+                Color.Black,
             ];
 
             MajorGridLines = true;

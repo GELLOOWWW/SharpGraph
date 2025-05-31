@@ -67,14 +67,14 @@ namespace SharpGraph.UI
             this.Dock = DockStyle.Top;
         }
 
-        private void OpenForm(Form form)
+        private static void OpenForm(Form form)
         {
             if (form == null) return;
             form.StartPosition = FormStartPosition.CenterParent;
             form.Show();
         }
 
-        private void ShowMessage(string message)
+        private static void ShowMessage(string message)
         {
             MessageBox.Show(message, "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
