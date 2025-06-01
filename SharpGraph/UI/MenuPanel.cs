@@ -8,11 +8,12 @@ namespace SharpGraph.UI
     public class MenuPanel : UserControl
     {
         private ToolStrip? toolStrip;
-        private ToolStripDropDownButton? formsDropDownButton;
-        private ToolStripDropDownButton? settingsDropDownButton;
-        private ToolStripDropDownButton? aboutDropDownButton;
+        private ToolStripDropDownButton? tsbtnApp;
+        private ToolStripDropDownButton? tsbtnActions;
+        private ToolStripDropDownButton? tsbtnAbout;
 
         public event Action? DarkModeToggle;
+        public event Action? SaveGraph;
 
         public MenuPanel()
         {
@@ -22,44 +23,50 @@ namespace SharpGraph.UI
         private void InitializeComponents()
         {
             this.toolStrip = new ToolStrip();
-            this.formsDropDownButton = new ToolStripDropDownButton("App");
-            this.settingsDropDownButton = new ToolStripDropDownButton("Settings");
-            this.aboutDropDownButton = new ToolStripDropDownButton("About");
+            this.tsbtnApp = new ToolStripDropDownButton("App");
+            this.tsbtnActions = new ToolStripDropDownButton("Actions");
+            this.tsbtnAbout = new ToolStripDropDownButton("About");
 
             this.toolStrip.Dock = DockStyle.Top;
             this.toolStrip.GripStyle = ToolStripGripStyle.Hidden;
 
             // Setup Forms DropDownButton items (example forms)
-            var form1Item = new ToolStripMenuItem("Open Unit Converter");
-            form1Item.Click += (s, e) => OpenForm(new UnitConverter());
+            var app1Item = new ToolStripMenuItem("Open Unit Converter");
+            app1Item.Click += (s, e) => OpenForm(new UnitConverter());
 
-            var form2Item = new ToolStripMenuItem("Open Scientific Calculator");
-            form2Item.Click += (s, e) => OpenForm(new SciCal());
+            var app2Item = new ToolStripMenuItem("Open Scientific Calculator");
+            app2Item.Click += (s, e) => OpenForm(new SciCal());
 
-            this.formsDropDownButton.DropDownItems.Add(form1Item);
-            this.formsDropDownButton.DropDownItems.Add(form2Item);
-            this.formsDropDownButton.ToolTipText = "Open other apps";
+            this.tsbtnApp.DropDownItems.Add(app1Item);
+            this.tsbtnApp.DropDownItems.Add(app2Item);
+            this.tsbtnApp.ToolTipText = "Open other apps";
 
-            // Setup Settings DropDownButton items (example settings)
-            var setting1Item = new ToolStripMenuItem("[BETA] Toggle Dark Mode");
-            setting1Item.Click += (_, _) => DarkMode();
+            // Dark Mode Toggle
+            var actions1Item = new ToolStripMenuItem("[BETA] Toggle Dark Mode");
+            actions1Item.Click += (_, _) => DarkMode();
 
-            this.settingsDropDownButton.DropDownItems.Add(setting1Item);
-            this.settingsDropDownButton.ToolTipText = "Settings options";
+            this.tsbtnActions.DropDownItems.Add(actions1Item);
+            this.tsbtnActions.ToolTipText = "SharpGraph Actions";
+
+            // Save Graph
+            var actions2item = new ToolStripMenuItem("[BETA] Save Graph");
+            actions2item.Click += (_, _) => SaveGraph?.Invoke();
+
+            this.tsbtnActions.DropDownItems.Add(actions2item);
 
             // Setup About DropDownButton shows description label
             var about1Item = new ToolStripMenuItem("About");
             about1Item.Click += (_, _) => ShowMessage("idk");
 
-            this.aboutDropDownButton.DropDownItems.Add(about1Item);
-            this.aboutDropDownButton.ToolTipText = "About this application";
+            this.tsbtnAbout.DropDownItems.Add(about1Item);
+            this.tsbtnAbout.ToolTipText = "About this application";
 
             // Add drop down buttons to the ToolStrip
-            this.toolStrip.Items.Add(this.formsDropDownButton);
+            this.toolStrip.Items.Add(this.tsbtnApp);
             this.toolStrip.Items.Add(new ToolStripSeparator());
-            this.toolStrip.Items.Add(this.settingsDropDownButton);
+            this.toolStrip.Items.Add(this.tsbtnActions);
             this.toolStrip.Items.Add(new ToolStripSeparator());
-            this.toolStrip.Items.Add(this.aboutDropDownButton);
+            this.toolStrip.Items.Add(this.tsbtnAbout);
 
             // Add the ToolStrip to the UserControl
             this.Controls.Add(this.toolStrip);
