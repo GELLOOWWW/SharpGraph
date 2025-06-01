@@ -20,7 +20,7 @@ namespace SharpGraph.UI
         private void InitializeComponents()
         {
             this.toolStrip = new ToolStrip();
-            this.formsDropDownButton = new ToolStripDropDownButton("Forms");
+            this.formsDropDownButton = new ToolStripDropDownButton("App");
             this.settingsDropDownButton = new ToolStripDropDownButton("Settings");
             this.aboutDropDownButton = new ToolStripDropDownButton("About");
 
