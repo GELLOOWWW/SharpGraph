@@ -81,10 +81,10 @@
             // 
             panel6.BackColor = Color.FromArgb(34, 40, 49);
             panel6.Controls.Add(label8);
-            panel6.Location = new Point(1, -2);
-            panel6.Margin = new Padding(4, 3, 4, 3);
+            panel6.Location = new Point(1, -3);
+            panel6.Margin = new Padding(5, 4, 5, 4);
             panel6.Name = "panel6";
-            panel6.Size = new Size(1048, 54);
+            panel6.Size = new Size(1198, 72);
             panel6.TabIndex = 80;
             // 
             // label8
@@ -92,20 +92,20 @@
             label8.AutoSize = true;
             label8.Font = new Font("Segoe Fluent Icons", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.ForeColor = Color.FromArgb(223, 208, 184);
-            label8.Location = new Point(57, 8);
-            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Location = new Point(65, 11);
+            label8.Margin = new Padding(5, 0, 5, 0);
             label8.Name = "label8";
-            label8.Size = new Size(207, 27);
+            label8.Size = new Size(263, 34);
             label8.TabIndex = 77;
             label8.Text = "Scientific Calculator";
             // 
             // btnpercentage
             // 
             btnpercentage.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnpercentage.Location = new Point(832, 384);
-            btnpercentage.Margin = new Padding(4, 3, 4, 3);
+            btnpercentage.Location = new Point(951, 512);
+            btnpercentage.Margin = new Padding(5, 4, 5, 4);
             btnpercentage.Name = "btnpercentage";
-            btnpercentage.Size = new Size(106, 57);
+            btnpercentage.Size = new Size(121, 76);
             btnpercentage.TabIndex = 122;
             btnpercentage.Text = "%";
             btnpercentage.UseVisualStyleBackColor = true;
@@ -114,10 +114,10 @@
             // btninx
             // 
             btninx.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btninx.Location = new Point(832, 322);
-            btninx.Margin = new Padding(4, 3, 4, 3);
+            btninx.Location = new Point(951, 429);
+            btninx.Margin = new Padding(5, 4, 5, 4);
             btninx.Name = "btninx";
-            btninx.Size = new Size(106, 57);
+            btninx.Size = new Size(121, 76);
             btninx.TabIndex = 121;
             btninx.Text = "In x";
             btninx.UseVisualStyleBackColor = true;
@@ -126,10 +126,10 @@
             // btn1divx
             // 
             btn1divx.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn1divx.Location = new Point(832, 258);
-            btn1divx.Margin = new Padding(4, 3, 4, 3);
+            btn1divx.Location = new Point(951, 344);
+            btn1divx.Margin = new Padding(5, 4, 5, 4);
             btn1divx.Name = "btn1divx";
-            btn1divx.Size = new Size(106, 57);
+            btn1divx.Size = new Size(121, 76);
             btn1divx.TabIndex = 120;
             btn1divx.Text = "1/x";
             btn1divx.UseVisualStyleBackColor = true;
@@ -138,10 +138,10 @@
             // btnpower3
             // 
             btnpower3.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnpower3.Location = new Point(832, 195);
-            btnpower3.Margin = new Padding(4, 3, 4, 3);
+            btnpower3.Location = new Point(951, 260);
+            btnpower3.Margin = new Padding(5, 4, 5, 4);
             btnpower3.Name = "btnpower3";
-            btnpower3.Size = new Size(106, 57);
+            btnpower3.Size = new Size(121, 76);
             btnpower3.TabIndex = 119;
             btnpower3.Text = "x^3";
             btnpower3.UseVisualStyleBackColor = true;
@@ -150,10 +150,10 @@
             // bubtnpower2
             // 
             bubtnpower2.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            bubtnpower2.Location = new Point(832, 132);
-            bubtnpower2.Margin = new Padding(4, 3, 4, 3);
+            bubtnpower2.Location = new Point(951, 176);
+            bubtnpower2.Margin = new Padding(5, 4, 5, 4);
             bubtnpower2.Name = "bubtnpower2";
-            bubtnpower2.Size = new Size(106, 57);
+            bubtnpower2.Size = new Size(121, 76);
             bubtnpower2.TabIndex = 118;
             bubtnpower2.Text = "x^2";
             bubtnpower2.UseVisualStyleBackColor = true;
@@ -161,10 +161,10 @@
             // btnoct
             // 
             btnoct.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnoct.Location = new Point(719, 384);
-            btnoct.Margin = new Padding(4, 3, 4, 3);
+            btnoct.Location = new Point(822, 512);
+            btnoct.Margin = new Padding(5, 4, 5, 4);
             btnoct.Name = "btnoct";
-            btnoct.Size = new Size(106, 57);
+            btnoct.Size = new Size(121, 76);
             btnoct.TabIndex = 117;
             btnoct.Text = "Oct";
             btnoct.UseVisualStyleBackColor = true;
@@ -173,10 +173,10 @@
             // btnhex
             // 
             btnhex.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnhex.Location = new Point(719, 322);
-            btnhex.Margin = new Padding(4, 3, 4, 3);
+            btnhex.Location = new Point(822, 429);
+            btnhex.Margin = new Padding(5, 4, 5, 4);
             btnhex.Name = "btnhex";
-            btnhex.Size = new Size(106, 57);
+            btnhex.Size = new Size(121, 76);
             btnhex.TabIndex = 116;
             btnhex.Text = "Hex";
             btnhex.UseVisualStyleBackColor = true;
@@ -185,10 +185,10 @@
             // btnbin
             // 
             btnbin.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnbin.Location = new Point(719, 258);
-            btnbin.Margin = new Padding(4, 3, 4, 3);
+            btnbin.Location = new Point(822, 344);
+            btnbin.Margin = new Padding(5, 4, 5, 4);
             btnbin.Name = "btnbin";
-            btnbin.Size = new Size(106, 57);
+            btnbin.Size = new Size(121, 76);
             btnbin.TabIndex = 115;
             btnbin.Text = "Bin";
             btnbin.UseVisualStyleBackColor = true;
@@ -197,10 +197,10 @@
             // btndec
             // 
             btndec.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btndec.Location = new Point(719, 195);
-            btndec.Margin = new Padding(4, 3, 4, 3);
+            btndec.Location = new Point(822, 260);
+            btndec.Margin = new Padding(5, 4, 5, 4);
             btndec.Name = "btndec";
-            btndec.Size = new Size(106, 57);
+            btndec.Size = new Size(121, 76);
             btndec.TabIndex = 114;
             btndec.Text = "Dec";
             btndec.UseVisualStyleBackColor = true;
@@ -209,10 +209,10 @@
             // btnsqrt
             // 
             btnsqrt.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnsqrt.Location = new Point(719, 132);
-            btnsqrt.Margin = new Padding(4, 3, 4, 3);
+            btnsqrt.Location = new Point(822, 176);
+            btnsqrt.Margin = new Padding(5, 4, 5, 4);
             btnsqrt.Name = "btnsqrt";
-            btnsqrt.Size = new Size(106, 57);
+            btnsqrt.Size = new Size(121, 76);
             btnsqrt.TabIndex = 113;
             btnsqrt.Text = "Sqrt";
             btnsqrt.UseVisualStyleBackColor = true;
@@ -221,10 +221,10 @@
             // btnmod
             // 
             btnmod.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnmod.Location = new Point(606, 384);
-            btnmod.Margin = new Padding(4, 3, 4, 3);
+            btnmod.Location = new Point(693, 512);
+            btnmod.Margin = new Padding(5, 4, 5, 4);
             btnmod.Name = "btnmod";
-            btnmod.Size = new Size(106, 57);
+            btnmod.Size = new Size(121, 76);
             btnmod.TabIndex = 112;
             btnmod.Text = "Mod";
             btnmod.UseVisualStyleBackColor = true;
@@ -233,10 +233,10 @@
             // btntan
             // 
             btntan.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btntan.Location = new Point(606, 322);
-            btntan.Margin = new Padding(4, 3, 4, 3);
+            btntan.Location = new Point(693, 429);
+            btntan.Margin = new Padding(5, 4, 5, 4);
             btntan.Name = "btntan";
-            btntan.Size = new Size(106, 57);
+            btntan.Size = new Size(121, 76);
             btntan.TabIndex = 111;
             btntan.Text = "Tan";
             btntan.UseVisualStyleBackColor = true;
@@ -245,10 +245,10 @@
             // btncos
             // 
             btncos.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btncos.Location = new Point(606, 258);
-            btncos.Margin = new Padding(4, 3, 4, 3);
+            btncos.Location = new Point(693, 344);
+            btncos.Margin = new Padding(5, 4, 5, 4);
             btncos.Name = "btncos";
-            btncos.Size = new Size(106, 57);
+            btncos.Size = new Size(121, 76);
             btncos.TabIndex = 110;
             btncos.Text = "Cos";
             btncos.UseVisualStyleBackColor = true;
@@ -257,10 +257,10 @@
             // btnsin
             // 
             btnsin.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnsin.Location = new Point(606, 195);
-            btnsin.Margin = new Padding(4, 3, 4, 3);
+            btnsin.Location = new Point(693, 260);
+            btnsin.Margin = new Padding(5, 4, 5, 4);
             btnsin.Name = "btnsin";
-            btnsin.Size = new Size(106, 57);
+            btnsin.Size = new Size(121, 76);
             btnsin.TabIndex = 109;
             btnsin.Text = "Sin";
             btnsin.UseVisualStyleBackColor = true;
@@ -269,10 +269,10 @@
             // btnlog
             // 
             btnlog.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnlog.Location = new Point(606, 132);
-            btnlog.Margin = new Padding(4, 3, 4, 3);
+            btnlog.Location = new Point(693, 176);
+            btnlog.Margin = new Padding(5, 4, 5, 4);
             btnlog.Name = "btnlog";
-            btnlog.Size = new Size(106, 57);
+            btnlog.Size = new Size(121, 76);
             btnlog.TabIndex = 108;
             btnlog.Text = "Log";
             btnlog.UseVisualStyleBackColor = true;
@@ -281,10 +281,10 @@
             // btnexp
             // 
             btnexp.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnexp.Location = new Point(492, 385);
-            btnexp.Margin = new Padding(4, 3, 4, 3);
+            btnexp.Location = new Point(562, 513);
+            btnexp.Margin = new Padding(5, 4, 5, 4);
             btnexp.Name = "btnexp";
-            btnexp.Size = new Size(106, 57);
+            btnexp.Size = new Size(121, 76);
             btnexp.TabIndex = 107;
             btnexp.Text = "Exp";
             btnexp.UseVisualStyleBackColor = true;
@@ -293,10 +293,10 @@
             // btntanh
             // 
             btntanh.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btntanh.Location = new Point(492, 323);
-            btntanh.Margin = new Padding(4, 3, 4, 3);
+            btntanh.Location = new Point(562, 431);
+            btntanh.Margin = new Padding(5, 4, 5, 4);
             btntanh.Name = "btntanh";
-            btntanh.Size = new Size(106, 57);
+            btntanh.Size = new Size(121, 76);
             btntanh.TabIndex = 106;
             btntanh.Text = "Tanh";
             btntanh.UseVisualStyleBackColor = true;
@@ -305,10 +305,10 @@
             // btncosh
             // 
             btncosh.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btncosh.Location = new Point(492, 260);
-            btncosh.Margin = new Padding(4, 3, 4, 3);
+            btncosh.Location = new Point(562, 347);
+            btncosh.Margin = new Padding(5, 4, 5, 4);
             btncosh.Name = "btncosh";
-            btncosh.Size = new Size(106, 57);
+            btncosh.Size = new Size(121, 76);
             btncosh.TabIndex = 105;
             btncosh.Text = "Cosh";
             btncosh.UseVisualStyleBackColor = true;
@@ -317,10 +317,10 @@
             // btnsinh
             // 
             btnsinh.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnsinh.Location = new Point(492, 196);
-            btnsinh.Margin = new Padding(4, 3, 4, 3);
+            btnsinh.Location = new Point(562, 261);
+            btnsinh.Margin = new Padding(5, 4, 5, 4);
             btnsinh.Name = "btnsinh";
-            btnsinh.Size = new Size(106, 57);
+            btnsinh.Size = new Size(121, 76);
             btnsinh.TabIndex = 104;
             btnsinh.Text = "Sinh";
             btnsinh.UseVisualStyleBackColor = true;
@@ -329,10 +329,10 @@
             // btnpi
             // 
             btnpi.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnpi.Location = new Point(492, 133);
-            btnpi.Margin = new Padding(4, 3, 4, 3);
+            btnpi.Location = new Point(562, 177);
+            btnpi.Margin = new Padding(5, 4, 5, 4);
             btnpi.Name = "btnpi";
-            btnpi.Size = new Size(106, 57);
+            btnpi.Size = new Size(121, 76);
             btnpi.TabIndex = 103;
             btnpi.Text = "PI";
             btnpi.UseVisualStyleBackColor = true;
@@ -340,23 +340,22 @@
             // 
             // button6
             // 
-            button6.Location = new Point(465, 132);
-            button6.Margin = new Padding(4, 3, 4, 3);
+            button6.Location = new Point(531, 176);
+            button6.Margin = new Padding(5, 4, 5, 4);
             button6.Name = "button6";
-            button6.Size = new Size(20, 310);
+            button6.Size = new Size(23, 413);
             button6.TabIndex = 102;
             button6.Text = ">";
             button6.UseVisualStyleBackColor = true;
-            button6.Click += button6_Click;
             // 
             // txtResult
             // 
             txtResult.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            txtResult.Location = new Point(86, 67);
-            txtResult.Margin = new Padding(4, 3, 4, 3);
+            txtResult.Location = new Point(98, 89);
+            txtResult.Margin = new Padding(5, 4, 5, 4);
             txtResult.Multiline = true;
             txtResult.Name = "txtResult";
-            txtResult.Size = new Size(523, 51);
+            txtResult.Size = new Size(597, 67);
             txtResult.TabIndex = 101;
             txtResult.Text = "0";
             txtResult.TextAlign = HorizontalAlignment.Right;
@@ -364,10 +363,10 @@
             // btndevide
             // 
             btndevide.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btndevide.Location = new Point(371, 385);
-            btndevide.Margin = new Padding(4, 3, 4, 3);
+            btndevide.Location = new Point(424, 513);
+            btndevide.Margin = new Padding(5, 4, 5, 4);
             btndevide.Name = "btndevide";
-            btndevide.Size = new Size(89, 57);
+            btndevide.Size = new Size(102, 76);
             btndevide.TabIndex = 100;
             btndevide.Text = "/";
             btndevide.UseVisualStyleBackColor = true;
@@ -376,10 +375,10 @@
             // btnequal
             // 
             btnequal.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnequal.Location = new Point(276, 385);
-            btnequal.Margin = new Padding(4, 3, 4, 3);
+            btnequal.Location = new Point(315, 513);
+            btnequal.Margin = new Padding(5, 4, 5, 4);
             btnequal.Name = "btnequal";
-            btnequal.Size = new Size(89, 57);
+            btnequal.Size = new Size(102, 76);
             btnequal.TabIndex = 99;
             btnequal.Text = "=";
             btnequal.UseVisualStyleBackColor = true;
@@ -388,10 +387,10 @@
             // btndot
             // 
             btndot.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btndot.Location = new Point(182, 385);
-            btndot.Margin = new Padding(4, 3, 4, 3);
+            btndot.Location = new Point(208, 513);
+            btndot.Margin = new Padding(5, 4, 5, 4);
             btndot.Name = "btndot";
-            btndot.Size = new Size(89, 57);
+            btndot.Size = new Size(102, 76);
             btndot.TabIndex = 98;
             btndot.Text = ".";
             btndot.UseVisualStyleBackColor = true;
@@ -400,10 +399,10 @@
             // btn0
             // 
             btn0.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn0.Location = new Point(88, 384);
-            btn0.Margin = new Padding(4, 3, 4, 3);
+            btn0.Location = new Point(101, 512);
+            btn0.Margin = new Padding(5, 4, 5, 4);
             btn0.Name = "btn0";
-            btn0.Size = new Size(89, 57);
+            btn0.Size = new Size(102, 76);
             btn0.TabIndex = 97;
             btn0.Text = "0";
             btn0.UseVisualStyleBackColor = true;
@@ -412,10 +411,10 @@
             // btntimes
             // 
             btntimes.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btntimes.Location = new Point(371, 322);
-            btntimes.Margin = new Padding(4, 3, 4, 3);
+            btntimes.Location = new Point(424, 429);
+            btntimes.Margin = new Padding(5, 4, 5, 4);
             btntimes.Name = "btntimes";
-            btntimes.Size = new Size(89, 57);
+            btntimes.Size = new Size(102, 76);
             btntimes.TabIndex = 96;
             btntimes.Text = "*";
             btntimes.UseVisualStyleBackColor = true;
@@ -424,10 +423,10 @@
             // btn3
             // 
             btn3.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn3.Location = new Point(276, 322);
-            btn3.Margin = new Padding(4, 3, 4, 3);
+            btn3.Location = new Point(315, 429);
+            btn3.Margin = new Padding(5, 4, 5, 4);
             btn3.Name = "btn3";
-            btn3.Size = new Size(89, 57);
+            btn3.Size = new Size(102, 76);
             btn3.TabIndex = 95;
             btn3.Text = "3";
             btn3.UseVisualStyleBackColor = true;
@@ -436,10 +435,10 @@
             // btn2
             // 
             btn2.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn2.Location = new Point(182, 322);
-            btn2.Margin = new Padding(4, 3, 4, 3);
+            btn2.Location = new Point(208, 429);
+            btn2.Margin = new Padding(5, 4, 5, 4);
             btn2.Name = "btn2";
-            btn2.Size = new Size(89, 57);
+            btn2.Size = new Size(102, 76);
             btn2.TabIndex = 94;
             btn2.Text = "2";
             btn2.UseVisualStyleBackColor = true;
@@ -448,10 +447,10 @@
             // btn1
             // 
             btn1.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn1.Location = new Point(88, 321);
-            btn1.Margin = new Padding(4, 3, 4, 3);
+            btn1.Location = new Point(101, 428);
+            btn1.Margin = new Padding(5, 4, 5, 4);
             btn1.Name = "btn1";
-            btn1.Size = new Size(89, 57);
+            btn1.Size = new Size(102, 76);
             btn1.TabIndex = 93;
             btn1.Text = "1";
             btn1.UseVisualStyleBackColor = true;
@@ -460,10 +459,10 @@
             // btnplus
             // 
             btnplus.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnplus.Location = new Point(371, 258);
-            btnplus.Margin = new Padding(4, 3, 4, 3);
+            btnplus.Location = new Point(424, 344);
+            btnplus.Margin = new Padding(5, 4, 5, 4);
             btnplus.Name = "btnplus";
-            btnplus.Size = new Size(89, 57);
+            btnplus.Size = new Size(102, 76);
             btnplus.TabIndex = 92;
             btnplus.Text = "-";
             btnplus.UseVisualStyleBackColor = true;
@@ -472,10 +471,10 @@
             // btn4
             // 
             btn4.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn4.Location = new Point(276, 258);
-            btn4.Margin = new Padding(4, 3, 4, 3);
+            btn4.Location = new Point(315, 344);
+            btn4.Margin = new Padding(5, 4, 5, 4);
             btn4.Name = "btn4";
-            btn4.Size = new Size(89, 57);
+            btn4.Size = new Size(102, 76);
             btn4.TabIndex = 91;
             btn4.Text = "4";
             btn4.UseVisualStyleBackColor = true;
@@ -484,10 +483,10 @@
             // btn5
             // 
             btn5.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn5.Location = new Point(182, 258);
-            btn5.Margin = new Padding(4, 3, 4, 3);
+            btn5.Location = new Point(208, 344);
+            btn5.Margin = new Padding(5, 4, 5, 4);
             btn5.Name = "btn5";
-            btn5.Size = new Size(89, 57);
+            btn5.Size = new Size(102, 76);
             btn5.TabIndex = 90;
             btn5.Text = "5";
             btn5.UseVisualStyleBackColor = true;
@@ -496,10 +495,10 @@
             // btn6
             // 
             btn6.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn6.Location = new Point(88, 257);
-            btn6.Margin = new Padding(4, 3, 4, 3);
+            btn6.Location = new Point(101, 343);
+            btn6.Margin = new Padding(5, 4, 5, 4);
             btn6.Name = "btn6";
-            btn6.Size = new Size(89, 57);
+            btn6.Size = new Size(102, 76);
             btn6.TabIndex = 89;
             btn6.Text = "6";
             btn6.UseVisualStyleBackColor = true;
@@ -508,10 +507,10 @@
             // button5
             // 
             button5.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button5.Location = new Point(371, 195);
-            button5.Margin = new Padding(4, 3, 4, 3);
+            button5.Location = new Point(424, 260);
+            button5.Margin = new Padding(5, 4, 5, 4);
             button5.Name = "button5";
-            button5.Size = new Size(89, 57);
+            button5.Size = new Size(102, 76);
             button5.TabIndex = 88;
             button5.Text = "+";
             button5.UseVisualStyleBackColor = true;
@@ -520,10 +519,10 @@
             // btn9
             // 
             btn9.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn9.Location = new Point(276, 195);
-            btn9.Margin = new Padding(4, 3, 4, 3);
+            btn9.Location = new Point(315, 260);
+            btn9.Margin = new Padding(5, 4, 5, 4);
             btn9.Name = "btn9";
-            btn9.Size = new Size(89, 57);
+            btn9.Size = new Size(102, 76);
             btn9.TabIndex = 87;
             btn9.Text = "9";
             btn9.UseVisualStyleBackColor = true;
@@ -532,10 +531,10 @@
             // btn8
             // 
             btn8.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn8.Location = new Point(182, 195);
-            btn8.Margin = new Padding(4, 3, 4, 3);
+            btn8.Location = new Point(208, 260);
+            btn8.Margin = new Padding(5, 4, 5, 4);
             btn8.Name = "btn8";
-            btn8.Size = new Size(89, 57);
+            btn8.Size = new Size(102, 76);
             btn8.TabIndex = 86;
             btn8.Text = "8";
             btn8.UseVisualStyleBackColor = true;
@@ -544,10 +543,10 @@
             // btn7
             // 
             btn7.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn7.Location = new Point(88, 194);
-            btn7.Margin = new Padding(4, 3, 4, 3);
+            btn7.Location = new Point(101, 259);
+            btn7.Margin = new Padding(5, 4, 5, 4);
             btn7.Name = "btn7";
-            btn7.Size = new Size(89, 57);
+            btn7.Size = new Size(102, 76);
             btn7.TabIndex = 85;
             btn7.Text = "7";
             btn7.UseVisualStyleBackColor = true;
@@ -556,10 +555,10 @@
             // btnpm
             // 
             btnpm.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnpm.Location = new Point(369, 130);
-            btnpm.Margin = new Padding(4, 3, 4, 3);
+            btnpm.Location = new Point(422, 173);
+            btnpm.Margin = new Padding(5, 4, 5, 4);
             btnpm.Name = "btnpm";
-            btnpm.Size = new Size(89, 57);
+            btnpm.Size = new Size(102, 76);
             btnpm.TabIndex = 84;
             btnpm.Text = "PM";
             btnpm.UseVisualStyleBackColor = true;
@@ -568,10 +567,10 @@
             // btnclear
             // 
             btnclear.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnclear.Location = new Point(274, 130);
-            btnclear.Margin = new Padding(4, 3, 4, 3);
+            btnclear.Location = new Point(313, 173);
+            btnclear.Margin = new Padding(5, 4, 5, 4);
             btnclear.Name = "btnclear";
-            btnclear.Size = new Size(89, 57);
+            btnclear.Size = new Size(102, 76);
             btnclear.TabIndex = 83;
             btnclear.Text = "C";
             btnclear.UseVisualStyleBackColor = true;
@@ -580,10 +579,10 @@
             // btnclearenter
             // 
             btnclearenter.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnclearenter.Location = new Point(180, 130);
-            btnclearenter.Margin = new Padding(4, 3, 4, 3);
+            btnclearenter.Location = new Point(206, 173);
+            btnclearenter.Margin = new Padding(5, 4, 5, 4);
             btnclearenter.Name = "btnclearenter";
-            btnclearenter.Size = new Size(89, 57);
+            btnclearenter.Size = new Size(102, 76);
             btnclearenter.TabIndex = 82;
             btnclearenter.Text = "CE";
             btnclearenter.UseVisualStyleBackColor = true;
@@ -592,10 +591,10 @@
             // btnerase
             // 
             btnerase.Font = new Font("Wingdings", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 2);
-            btnerase.Location = new Point(88, 129);
-            btnerase.Margin = new Padding(4, 3, 4, 3);
+            btnerase.Location = new Point(101, 172);
+            btnerase.Margin = new Padding(5, 4, 5, 4);
             btnerase.Name = "btnerase";
-            btnerase.Size = new Size(89, 57);
+            btnerase.Size = new Size(102, 76);
             btnerase.TabIndex = 81;
             btnerase.Text = "";
             btnerase.UseVisualStyleBackColor = true;
@@ -603,10 +602,10 @@
             // 
             // SciCal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(57, 62, 70);
-            ClientSize = new Size(1044, 541);
+            ClientSize = new Size(1191, 711);
             Controls.Add(btnpercentage);
             Controls.Add(btninx);
             Controls.Add(btn1divx);
@@ -650,12 +649,12 @@
             Controls.Add(btnclearenter);
             Controls.Add(btnerase);
             Controls.Add(panel6);
-            Margin = new Padding(4, 3, 4, 3);
-            MaximumSize = new Size(1060, 580);
-            MinimumSize = new Size(1060, 580);
+            Margin = new Padding(5, 4, 5, 4);
+            MaximumSize = new Size(1209, 758);
+            MinimumSize = new Size(1209, 758);
             Name = "SciCal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "scientificcalculator";
+            Text = "Calculator";
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
             ResumeLayout(false);

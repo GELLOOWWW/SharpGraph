@@ -8,13 +8,7 @@
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MinimizeBox = false;
             this.MaximizeBox = false;
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnerase_Click(object sender, EventArgs e)

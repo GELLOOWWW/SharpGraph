@@ -4,7 +4,6 @@
     {
         readonly double meter;
         string? op;
-        bool bSideBarExpand;
         public UnitConverter()
         {
             InitializeComponent();
@@ -142,33 +141,6 @@
             radioButton11.Checked = false;
             radioButton12.Checked = false;
 
-        }
-
-        private void timerunit_Tick(object sender, EventArgs e)
-        {
-            if (bSideBarExpand)
-            {
-                sidebar.Width -= 10;
-                if (sidebar.Width == sidebar.MinimumSize.Width)
-                {
-                    bSideBarExpand = false;
-                    timerunit.Stop();
-                }
-            }
-            else
-            {
-                sidebar.Width += 10;
-                if (sidebar.Width == sidebar.MaximumSize.Width)
-                {
-                    bSideBarExpand = true;
-                    timerunit.Stop();
-                }
-            }
-        }
-
-        private void buttonunit_Click(object sender, EventArgs e)
-        {
-            timerunit.Start();
         }
     }
 }

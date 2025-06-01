@@ -28,523 +28,377 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.lblConverter = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.btnConvert = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton12 = new System.Windows.Forms.RadioButton();
-            this.radioButton11 = new System.Windows.Forms.RadioButton();
-            this.radioButton10 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtConvert = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.sidebar = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.buttonunit = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.timerunit = new System.Windows.Forms.Timer(this.components);
-            this.groupBox1.SuspendLayout();
-            this.sidebar.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.SuspendLayout();
+            lblConverter = new Label();
+            label6 = new Label();
+            btnClose = new Button();
+            btnConvert = new Button();
+            btnReset = new Button();
+            groupBox1 = new GroupBox();
+            radioButton12 = new RadioButton();
+            radioButton11 = new RadioButton();
+            radioButton10 = new RadioButton();
+            radioButton7 = new RadioButton();
+            radioButton8 = new RadioButton();
+            radioButton9 = new RadioButton();
+            radioButton4 = new RadioButton();
+            radioButton5 = new RadioButton();
+            radioButton6 = new RadioButton();
+            radioButton3 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            txtConvert = new TextBox();
+            label2 = new Label();
+            panel6 = new Panel();
+            label7 = new Label();
+            groupBox1.SuspendLayout();
+            panel6.SuspendLayout();
+            SuspendLayout();
             // 
             // lblConverter
             // 
-            this.lblConverter.AutoSize = true;
-            this.lblConverter.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConverter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(208)))), ((int)(((byte)(184)))));
-            this.lblConverter.Location = new System.Drawing.Point(689, 64);
-            this.lblConverter.Name = "lblConverter";
-            this.lblConverter.Size = new System.Drawing.Size(20, 21);
-            this.lblConverter.TabIndex = 17;
-            this.lblConverter.Text = "0";
+            lblConverter.AutoSize = true;
+            lblConverter.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblConverter.ForeColor = Color.FromArgb(223, 208, 184);
+            lblConverter.Location = new Point(919, 98);
+            lblConverter.Margin = new Padding(4, 0, 4, 0);
+            lblConverter.Name = "lblConverter";
+            lblConverter.Size = new Size(27, 29);
+            lblConverter.TabIndex = 17;
+            lblConverter.Text = "0";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(208)))), ((int)(((byte)(184)))));
-            this.label6.Location = new System.Drawing.Point(537, 64);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(156, 21);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Converted Value:";
+            label6.AutoSize = true;
+            label6.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.FromArgb(223, 208, 184);
+            label6.Location = new Point(716, 98);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(213, 29);
+            label6.TabIndex = 16;
+            label6.Text = "Converted Value:";
             // 
             // btnClose
             // 
-            this.btnClose.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(660, 103);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(173, 30);
-            this.btnClose.TabIndex = 15;
-            this.btnClose.Text = "CLOSE";
-            this.btnClose.UseVisualStyleBackColor = true;
+            btnClose.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnClose.Location = new Point(880, 158);
+            btnClose.Margin = new Padding(4, 5, 4, 5);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(231, 46);
+            btnClose.TabIndex = 15;
+            btnClose.Text = "CLOSE";
+            btnClose.UseVisualStyleBackColor = true;
             // 
             // btnConvert
             // 
-            this.btnConvert.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConvert.Location = new System.Drawing.Point(389, 103);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(173, 30);
-            this.btnConvert.TabIndex = 14;
-            this.btnConvert.Text = "CONVERT";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click_1);
+            btnConvert.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConvert.Location = new Point(519, 158);
+            btnConvert.Margin = new Padding(4, 5, 4, 5);
+            btnConvert.Name = "btnConvert";
+            btnConvert.Size = new Size(231, 46);
+            btnConvert.TabIndex = 14;
+            btnConvert.Text = "CONVERT";
+            btnConvert.UseVisualStyleBackColor = true;
+            btnConvert.Click += btnConvert_Click_1;
             // 
             // btnReset
             // 
-            this.btnReset.Font = new System.Drawing.Font("Modern No. 20", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(118, 102);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(173, 30);
-            this.btnReset.TabIndex = 13;
-            this.btnReset.Text = "RESET";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            btnReset.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReset.Location = new Point(157, 157);
+            btnReset.Margin = new Padding(4, 5, 4, 5);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(231, 46);
+            btnReset.TabIndex = 13;
+            btnReset.Text = "RESET";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += btnReset_Click;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton12);
-            this.groupBox1.Controls.Add(this.radioButton11);
-            this.groupBox1.Controls.Add(this.radioButton10);
-            this.groupBox1.Controls.Add(this.radioButton7);
-            this.groupBox1.Controls.Add(this.radioButton8);
-            this.groupBox1.Controls.Add(this.radioButton9);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Font = new System.Drawing.Font("Modern No. 20", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(208)))), ((int)(((byte)(184)))));
-            this.groupBox1.Location = new System.Drawing.Point(63, 167);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(825, 226);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Select Unit For Conversion";
+            groupBox1.Controls.Add(radioButton12);
+            groupBox1.Controls.Add(radioButton11);
+            groupBox1.Controls.Add(radioButton10);
+            groupBox1.Controls.Add(radioButton7);
+            groupBox1.Controls.Add(radioButton8);
+            groupBox1.Controls.Add(radioButton9);
+            groupBox1.Controls.Add(radioButton4);
+            groupBox1.Controls.Add(radioButton5);
+            groupBox1.Controls.Add(radioButton6);
+            groupBox1.Controls.Add(radioButton3);
+            groupBox1.Controls.Add(radioButton2);
+            groupBox1.Controls.Add(radioButton1);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.ForeColor = Color.FromArgb(223, 208, 184);
+            groupBox1.Location = new Point(84, 257);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(1100, 348);
+            groupBox1.TabIndex = 12;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Select Unit For Conversion";
             // 
             // radioButton12
             // 
-            this.radioButton12.AutoSize = true;
-            this.radioButton12.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton12.Location = new System.Drawing.Point(599, 195);
-            this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(200, 25);
-            this.radioButton12.TabIndex = 14;
-            this.radioButton12.Text = "Centemiter to Meter";
-            this.radioButton12.UseVisualStyleBackColor = true;
-            this.radioButton12.CheckedChanged += new System.EventHandler(this.radioButton12_CheckedChanged_1);
+            radioButton12.AutoSize = true;
+            radioButton12.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton12.Location = new Point(799, 300);
+            radioButton12.Margin = new Padding(4, 5, 4, 5);
+            radioButton12.Name = "radioButton12";
+            radioButton12.Size = new Size(265, 33);
+            radioButton12.TabIndex = 14;
+            radioButton12.Text = "Centemiter to Meter";
+            radioButton12.UseVisualStyleBackColor = true;
+            radioButton12.CheckedChanged += radioButton12_CheckedChanged_1;
             // 
             // radioButton11
             // 
-            this.radioButton11.AutoSize = true;
-            this.radioButton11.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton11.Location = new System.Drawing.Point(599, 166);
-            this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(159, 25);
-            this.radioButton11.TabIndex = 13;
-            this.radioButton11.Text = "Feet to  Inches";
-            this.radioButton11.UseVisualStyleBackColor = true;
-            this.radioButton11.CheckedChanged += new System.EventHandler(this.radioButton11_CheckedChanged_1);
+            radioButton11.AutoSize = true;
+            radioButton11.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton11.Location = new Point(799, 255);
+            radioButton11.Margin = new Padding(4, 5, 4, 5);
+            radioButton11.Name = "radioButton11";
+            radioButton11.Size = new Size(206, 33);
+            radioButton11.TabIndex = 13;
+            radioButton11.Text = "Feet to  Inches";
+            radioButton11.UseVisualStyleBackColor = true;
+            radioButton11.CheckedChanged += radioButton11_CheckedChanged_1;
             // 
             // radioButton10
             // 
-            this.radioButton10.AutoSize = true;
-            this.radioButton10.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton10.Location = new System.Drawing.Point(325, 166);
-            this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(178, 25);
-            this.radioButton10.TabIndex = 12;
-            this.radioButton10.Text = "Mililiter to Liter";
-            this.radioButton10.UseVisualStyleBackColor = true;
-            this.radioButton10.CheckedChanged += new System.EventHandler(this.radioButton10_CheckedChanged_1);
+            radioButton10.AutoSize = true;
+            radioButton10.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton10.Location = new Point(433, 255);
+            radioButton10.Margin = new Padding(4, 5, 4, 5);
+            radioButton10.Name = "radioButton10";
+            radioButton10.Size = new Size(209, 33);
+            radioButton10.TabIndex = 12;
+            radioButton10.Text = "Mililiter to Liter";
+            radioButton10.UseVisualStyleBackColor = true;
+            radioButton10.CheckedChanged += radioButton10_CheckedChanged_1;
             // 
             // radioButton7
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton7.Location = new System.Drawing.Point(599, 135);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(145, 25);
-            this.radioButton7.TabIndex = 11;
-            this.radioButton7.Text = "Meter to Feet";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged_1);
+            radioButton7.AutoSize = true;
+            radioButton7.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton7.Location = new Point(799, 208);
+            radioButton7.Margin = new Padding(4, 5, 4, 5);
+            radioButton7.Name = "radioButton7";
+            radioButton7.Size = new Size(190, 33);
+            radioButton7.TabIndex = 11;
+            radioButton7.Text = "Meter to Feet";
+            radioButton7.UseVisualStyleBackColor = true;
+            radioButton7.CheckedChanged += radioButton7_CheckedChanged_1;
             // 
             // radioButton8
             // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton8.Location = new System.Drawing.Point(599, 104);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(194, 25);
-            this.radioButton8.TabIndex = 10;
-            this.radioButton8.Text = "Meter to Kilometer";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            this.radioButton8.CheckedChanged += new System.EventHandler(this.radioButton8_CheckedChanged_1);
+            radioButton8.AutoSize = true;
+            radioButton8.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton8.Location = new Point(799, 160);
+            radioButton8.Margin = new Padding(4, 5, 4, 5);
+            radioButton8.Name = "radioButton8";
+            radioButton8.Size = new Size(250, 33);
+            radioButton8.TabIndex = 10;
+            radioButton8.Text = "Meter to Kilometer";
+            radioButton8.UseVisualStyleBackColor = true;
+            radioButton8.CheckedChanged += radioButton8_CheckedChanged_1;
             // 
             // radioButton9
             // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton9.Location = new System.Drawing.Point(599, 73);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(194, 25);
-            this.radioButton9.TabIndex = 9;
-            this.radioButton9.Text = "Kilometer to Meter";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            this.radioButton9.CheckedChanged += new System.EventHandler(this.radioButton9_CheckedChanged_1);
+            radioButton9.AutoSize = true;
+            radioButton9.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton9.Location = new Point(799, 112);
+            radioButton9.Margin = new Padding(4, 5, 4, 5);
+            radioButton9.Name = "radioButton9";
+            radioButton9.Size = new Size(250, 33);
+            radioButton9.TabIndex = 9;
+            radioButton9.Text = "Kilometer to Meter";
+            radioButton9.UseVisualStyleBackColor = true;
+            radioButton9.CheckedChanged += radioButton9_CheckedChanged_1;
             // 
             // radioButton4
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton4.Location = new System.Drawing.Point(325, 135);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(178, 25);
-            this.radioButton4.TabIndex = 8;
-            this.radioButton4.Text = "Liter to Mililiter";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged_1);
+            radioButton4.AutoSize = true;
+            radioButton4.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton4.Location = new Point(433, 208);
+            radioButton4.Margin = new Padding(4, 5, 4, 5);
+            radioButton4.Name = "radioButton4";
+            radioButton4.Size = new Size(209, 33);
+            radioButton4.TabIndex = 8;
+            radioButton4.Text = "Liter to Mililiter";
+            radioButton4.UseVisualStyleBackColor = true;
+            radioButton4.CheckedChanged += radioButton4_CheckedChanged_1;
             // 
             // radioButton5
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton5.Location = new System.Drawing.Point(325, 104);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(185, 25);
-            this.radioButton5.TabIndex = 7;
-            this.radioButton5.Text = "Gram to Kilogram";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged_1);
+            radioButton5.AutoSize = true;
+            radioButton5.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton5.Location = new Point(433, 160);
+            radioButton5.Margin = new Padding(4, 5, 4, 5);
+            radioButton5.Name = "radioButton5";
+            radioButton5.Size = new Size(238, 33);
+            radioButton5.TabIndex = 7;
+            radioButton5.Text = "Gram to Kilogram";
+            radioButton5.UseVisualStyleBackColor = true;
+            radioButton5.CheckedChanged += radioButton5_CheckedChanged_1;
             // 
             // radioButton6
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton6.Location = new System.Drawing.Point(325, 73);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(185, 25);
-            this.radioButton6.TabIndex = 6;
-            this.radioButton6.Text = "Kilogram to Gram";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged_1);
+            radioButton6.AutoSize = true;
+            radioButton6.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton6.Location = new Point(433, 112);
+            radioButton6.Margin = new Padding(4, 5, 4, 5);
+            radioButton6.Name = "radioButton6";
+            radioButton6.Size = new Size(238, 33);
+            radioButton6.TabIndex = 6;
+            radioButton6.Text = "Kilogram to Gram";
+            radioButton6.UseVisualStyleBackColor = true;
+            radioButton6.CheckedChanged += radioButton6_CheckedChanged_1;
             // 
             // radioButton3
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton3.Location = new System.Drawing.Point(25, 135);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(86, 25);
-            this.radioButton3.TabIndex = 5;
-            this.radioButton3.Text = "Kelvin";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged_1);
+            radioButton3.AutoSize = true;
+            radioButton3.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton3.Location = new Point(33, 208);
+            radioButton3.Margin = new Padding(4, 5, 4, 5);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(106, 33);
+            radioButton3.TabIndex = 5;
+            radioButton3.Text = "Kelvin";
+            radioButton3.UseVisualStyleBackColor = true;
+            radioButton3.CheckedChanged += radioButton3_CheckedChanged_1;
             // 
             // radioButton2
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(25, 104);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(204, 25);
-            this.radioButton2.TabIndex = 4;
-            this.radioButton2.Text = "Farenheit to Celsius";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged_1);
+            radioButton2.AutoSize = true;
+            radioButton2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton2.Location = new Point(33, 160);
+            radioButton2.Margin = new Padding(4, 5, 4, 5);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(268, 33);
+            radioButton2.TabIndex = 4;
+            radioButton2.Text = "Farenheit to Celsius";
+            radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged_1;
             // 
             // radioButton1
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(25, 73);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(205, 25);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.Text = "Celcius to Farenheit";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
+            radioButton1.AutoSize = true;
+            radioButton1.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            radioButton1.Location = new Point(33, 112);
+            radioButton1.Margin = new Padding(4, 5, 4, 5);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(268, 33);
+            radioButton1.TabIndex = 3;
+            radioButton1.Text = "Celcius to Farenheit";
+            radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged_1;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(644, 32);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 29);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Length";
+            label5.AutoSize = true;
+            label5.Location = new Point(859, 49);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(127, 39);
+            label5.TabIndex = 2;
+            label5.Text = "Length";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(48, 32);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(164, 29);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Temperature";
+            label4.AutoSize = true;
+            label4.Location = new Point(64, 49);
+            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(222, 39);
+            label4.TabIndex = 1;
+            label4.Text = "Temperature";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(373, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 29);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Weight";
+            label3.AutoSize = true;
+            label3.Location = new Point(497, 49);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(129, 39);
+            label3.TabIndex = 0;
+            label3.Text = "Weight";
             // 
             // txtConvert
             // 
-            this.txtConvert.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConvert.Location = new System.Drawing.Point(289, 62);
-            this.txtConvert.Name = "txtConvert";
-            this.txtConvert.Size = new System.Drawing.Size(232, 25);
-            this.txtConvert.TabIndex = 11;
+            txtConvert.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtConvert.Location = new Point(385, 95);
+            txtConvert.Margin = new Padding(4, 5, 4, 5);
+            txtConvert.Name = "txtConvert";
+            txtConvert.Size = new Size(308, 30);
+            txtConvert.TabIndex = 11;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Modern No. 20", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(208)))), ((int)(((byte)(184)))));
-            this.label2.Location = new System.Drawing.Point(59, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(224, 21);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Enter the Value convert:";
-            // 
-            // sidebar
-            // 
-            this.sidebar.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.sidebar.Controls.Add(this.panel2);
-            this.sidebar.Controls.Add(this.panel1);
-            this.sidebar.Controls.Add(this.panel3);
-            this.sidebar.Controls.Add(this.panel4);
-            this.sidebar.Controls.Add(this.panel5);
-            this.sidebar.Location = new System.Drawing.Point(-1, -16);
-            this.sidebar.MaximumSize = new System.Drawing.Size(262, 500);
-            this.sidebar.MinimumSize = new System.Drawing.Size(49, 500);
-            this.sidebar.Name = "sidebar";
-            this.sidebar.Size = new System.Drawing.Size(49, 500);
-            this.sidebar.TabIndex = 78;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(257, 59);
-            this.panel2.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Modern No. 20", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(85, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "MENU";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(3, 68);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(260, 48);
-            this.panel1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(-12, -11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(282, 71);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Unit Converter";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.button2);
-            this.panel3.Location = new System.Drawing.Point(3, 122);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(260, 48);
-            this.panel3.TabIndex = 2;
-            // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(-12, -11);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(282, 71);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Scintific calculator";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Location = new System.Drawing.Point(3, 176);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(260, 48);
-            this.panel4.TabIndex = 3;
-            // 
-            // button3
-            // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(-12, -11);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(291, 71);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Theme";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.button4);
-            this.panel5.Location = new System.Drawing.Point(3, 230);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(260, 48);
-            this.panel5.TabIndex = 4;
-            // 
-            // button4
-            // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(-24, -11);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(311, 71);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "ewan ko";
-            this.button4.UseVisualStyleBackColor = true;
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(223, 208, 184);
+            label2.Location = new Point(79, 98);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(290, 29);
+            label2.TabIndex = 10;
+            label2.Text = "Enter the Value convert:";
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(40)))), ((int)(((byte)(49)))));
-            this.panel6.Controls.Add(this.buttonunit);
-            this.panel6.Controls.Add(this.label7);
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Location = new System.Drawing.Point(0, -1);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(898, 47);
-            this.panel6.TabIndex = 79;
-            // 
-            // buttonunit
-            // 
-            this.buttonunit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonunit.Location = new System.Drawing.Point(4, 3);
-            this.buttonunit.Name = "buttonunit";
-            this.buttonunit.Size = new System.Drawing.Size(38, 38);
-            this.buttonunit.TabIndex = 1;
-            this.buttonunit.Text = "III";
-            this.buttonunit.UseVisualStyleBackColor = true;
-            this.buttonunit.Click += new System.EventHandler(this.buttonunit_Click);
+            panel6.BackColor = Color.FromArgb(34, 40, 49);
+            panel6.Controls.Add(label7);
+            panel6.Location = new Point(0, -2);
+            panel6.Margin = new Padding(4, 5, 4, 5);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(1197, 72);
+            panel6.TabIndex = 79;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Font = new System.Drawing.Font("Wide Latin", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(208)))), ((int)(((byte)(184)))));
-            this.label7.Location = new System.Drawing.Point(202, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(123, 33);
-            this.label7.TabIndex = 78;
-            this.label7.Text = "Unit";
+            label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
+            label7.Font = new Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.FromArgb(223, 208, 184);
+            label7.Location = new Point(84, 11);
+            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(236, 39);
+            label7.TabIndex = 78;
+            label7.Text = "Unit Converter";
             // 
-            // label8
+            // UnitConverter
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Wide Latin", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(208)))), ((int)(((byte)(184)))));
-            this.label8.Location = new System.Drawing.Point(49, 7);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(159, 33);
-            this.label8.TabIndex = 77;
-            this.label8.Text = "Sharp";
-            // 
-            // timerunit
-            // 
-            this.timerunit.Tick += new System.EventHandler(this.timerunit_Tick);
-            // 
-            // unitconverter
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(62)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(900, 469);
-            this.Controls.Add(this.panel6);
-            this.Controls.Add(this.sidebar);
-            this.Controls.Add(this.lblConverter);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnConvert);
-            this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.txtConvert);
-            this.Controls.Add(this.label2);
-            this.Name = "unitconverter";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "unitconverter";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.sidebar.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(57, 62, 70);
+            ClientSize = new Size(1200, 722);
+            Controls.Add(panel6);
+            Controls.Add(lblConverter);
+            Controls.Add(label6);
+            Controls.Add(btnClose);
+            Controls.Add(btnConvert);
+            Controls.Add(btnReset);
+            Controls.Add(groupBox1);
+            Controls.Add(txtConvert);
+            Controls.Add(label2);
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "UnitConverter";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Unit Converter";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -573,21 +427,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtConvert;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.FlowLayoutPanel sidebar;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button buttonunit;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Timer timerunit;
     }
 }
