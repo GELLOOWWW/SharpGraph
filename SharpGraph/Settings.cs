@@ -72,13 +72,12 @@ namespace SharpGraph
             ExpressionColors =
             [
                 Color.Red,
-                Color.Blue,
                 Color.Green,
-                Color.Orange,
+                Color.Blue,
                 Color.Purple,
-                Color.Brown,
-                Color.Magenta,
-                Color.Violet,
+                Color.Orange,
+                Color.Yellow,
+                Color.Black,
             ];
 
             MajorGridLines = true;

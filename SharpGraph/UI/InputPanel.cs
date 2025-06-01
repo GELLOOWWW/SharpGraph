@@ -196,7 +196,7 @@ namespace SharpGraph.UI
 
             try
             {
-                await Task.Delay(100); // slight delay for when user is typing
+                await Task.Delay(300); // slight delay for when user is typing
 
                 var parsedNewExpr = await ExpressionParser.TryParseAsync(newExpression, GetColorForExpression(newExpression));
                 if (!parsedNewExpr.IsValid)

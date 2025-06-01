@@ -53,12 +53,9 @@ namespace SharpGraph.Cartesian
                             // Evaluate the expression at (x, y)
                             double result = expr.CompiledFunction(x, y);
                             values[gx, gy] = result;
-                        }
-                        catch
-                        {
+
                             // On exceptions, mark as invalid and assign 0 for safety
-                            values[gx, gy] = 0;
-                        }
+                        } catch { values[gx, gy] = 0; }
                     }
                 });
             });
@@ -237,13 +234,6 @@ namespace SharpGraph.Cartesian
 
             g.DrawLine(axisPen, 0, half_h, w, half_h); // draw x-axis
             g.DrawLine(axisPen, half_w, 0, half_w, h); // draw y-axis
-
-            // draw origin point label (0)
-            string s = "0";
-            Brush labelBrush = new SolidBrush(Settings.GridNumColor);
-            SizeF size = g.MeasureString(s, Settings.FontDefault);
-            PointF labelPos = new(mapper.MapXToScreen(0) - 10, mapper.MapYToScreen(-0.225f) - size.Height / 2);
-            g.DrawString(s, Settings.FontDefault, labelBrush, labelPos);
         }
     }
 }
