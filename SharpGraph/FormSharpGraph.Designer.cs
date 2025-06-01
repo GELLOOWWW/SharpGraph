@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSharpGraph));
             spltPanels = new SplitContainer();
             pbGraphScreen = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)spltPanels).BeginInit();
@@ -64,6 +65,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1084, 661);
             Controls.Add(spltPanels);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormSharpGraph";
             Text = "Sharp Graph";
             Load += FormSharpGraph_Load;
