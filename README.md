@@ -9,11 +9,12 @@ Additionally, it also comes with a Unit Converter (as per requirement) and an Ar
 ---
 ## Features
  - Graphing Calculator Features
-   - Allow users to input and plot implicit functions, f(x, y) = 0 (the “=0“is omitted when inputting functions).
+   - Allow users to input and plot implicit functions, f(x, y) = 0 (the “=0“ is omitted when inputting functions).
    - Display user-defined graphs.
    - Allow users to view multiple graphs simultaneously.  
    - Utilize async functions to better utilize multithreading capabilities.
    - [Beta] Dark Mode
+   - [Beta] Save Graph as Image
 
 ![{9545A00F-2474-413F-B079-63D42B73236D}](https://github.com/user-attachments/assets/30240411-52a9-411a-8b57-2bd1e488c8e7)
 ---
