@@ -12,6 +12,8 @@ namespace SharpGraph.UI
         private ToolStripDropDownButton? settingsDropDownButton;
         private ToolStripDropDownButton? aboutDropDownButton;
 
+        public event Action? DarkModeToggle;
+
         public MenuPanel()
         {
             InitializeComponents();
@@ -39,8 +41,8 @@ namespace SharpGraph.UI
             this.formsDropDownButton.ToolTipText = "Open other apps";
 
             // Setup Settings DropDownButton items (example settings)
-            var setting1Item = new ToolStripMenuItem("Settings");
-            setting1Item.Click += (s, e) => ShowMessage("Implementation Soon!");
+            var setting1Item = new ToolStripMenuItem("[BETA] Toggle Dark Mode");
+            setting1Item.Click += (_, _) => DarkMode();
 
             this.settingsDropDownButton.DropDownItems.Add(setting1Item);
             this.settingsDropDownButton.ToolTipText = "Settings options";
@@ -65,6 +67,17 @@ namespace SharpGraph.UI
             // Set UserControl size defaults
             this.Height = toolStrip.Height;
             this.Dock = DockStyle.Top;
+        }
+
+        static bool bDarkMode = false;
+        private void DarkMode()
+        {
+            bDarkMode = !bDarkMode;
+            Settings.BgColor = bDarkMode ? Color.Black : Color.White;
+            Settings.AxisColor = bDarkMode ? Color.White : Color.Black;
+            Settings.GridNumColor = bDarkMode ? Color.White : Color.Black;
+
+            DarkModeToggle?.Invoke();
         }
 
         private void OpenForm(Form form)

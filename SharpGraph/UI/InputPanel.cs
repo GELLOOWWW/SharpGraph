@@ -31,7 +31,7 @@ namespace SharpGraph.UI
         private void InitializeComponents()
         {
             container.Controls.Clear();
-            container.BackColor = Color.LightGray;
+            container.BackColor = Settings.UIColor;
             container.AutoScroll = true;
 
             tblExprList.Dock = DockStyle.Fill;
@@ -66,6 +66,8 @@ namespace SharpGraph.UI
 
             txtbxInput.Font = Settings.ExpressionFont;
             txtbxInput.BorderStyle = BorderStyle.FixedSingle;
+            txtbxInput.ForeColor = Settings.FgColor;
+            txtbxInput.BackColor = Settings.TextBoxColor;
             txtbxInput.Dock = DockStyle.Fill;
             txtbxInput.Margin = new Padding(3, 5, 3, 5);
             txtbxInput.KeyDown += InputBox_KeyDown;
@@ -74,7 +76,7 @@ namespace SharpGraph.UI
             btnAdd.Text = "➕";
             btnAdd.Dock = DockStyle.Fill;
             btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.BackColor = Color.LightGreen;
+            btnAdd.BackColor = Settings.AddExprColor;
             btnAdd.Margin = new Padding(3, 5, 3, 5);
             btnAdd.Click += async (_, _) => await SubmitExpressionAsync();
             tblExprList.Controls.Add(btnAdd, 2, idx);
@@ -143,6 +145,8 @@ namespace SharpGraph.UI
             {
                 Text = expr,
                 Font = Settings.ExpressionFont,
+                ForeColor = Settings.FgColor,
+                BackColor = Settings.TextBoxColor,
                 BorderStyle = BorderStyle.None,
                 Dock = DockStyle.Fill,
                 Margin = new Padding(3, 5, 3, 5),
@@ -163,7 +167,7 @@ namespace SharpGraph.UI
             {
                 Text = "❌",
                 FlatStyle = FlatStyle.Flat,
-                BackColor = Color.Red,
+                BackColor = Settings.RemoveExprColor,
                 Dock = DockStyle.Fill,
                 Margin = new Padding(3, 5, 3, 5),
                 TabStop = false,
@@ -202,7 +206,7 @@ namespace SharpGraph.UI
                 else
                 {
                     ExpressionModified?.Invoke(i, parsedNewExpr);
-                    textBox.BackColor = Settings.BgColor;
+                    textBox.BackColor = Settings.TextBoxColor;
                 }
             } catch {  } // ignore cancellation, because most likely user is still typing
         }

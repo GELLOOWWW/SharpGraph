@@ -9,7 +9,10 @@ namespace SharpGraph
 
         public static Color FgColor { get; set; }
 
-        public static Color ControlColor { get; set; }
+        public static Color UIColor { get; set; }
+        public static Color TextBoxColor { get; set; }
+        public static Color AddExprColor { get; set; }
+        public static Color RemoveExprColor { get; set; }
 
         public static Color ErrorColor { get; set; }
 
@@ -27,6 +30,8 @@ namespace SharpGraph
         /// Color used for axis lines.
         /// </summary>
         public static Color AxisColor { get; set; }
+
+        public static Color GridNumColor { get; set; }
 
         /// <summary>
         /// List of colors used for drawing different expression contours.
@@ -54,9 +59,15 @@ namespace SharpGraph
 
             ErrorColor = Color.MistyRose;
 
+            UIColor = Color.LightGray;
+            TextBoxColor = Color.White;
+            AddExprColor = Color.DimGray;
+            RemoveExprColor = Color.DimGray;
+
             MajorGridColor = Color.DarkGray;
             MinorGridColor = Color.LightGray;
             AxisColor = Color.Black;
+            GridNumColor = Color.Black;
 
             ExpressionColors =
             [
@@ -74,8 +85,7 @@ namespace SharpGraph
             MinorGridLines = true;
 
             FontDefault = new("Arial", 8);
-            ExpressionFont = new("Segui UI", 12);
-            ControlColor = Color.DarkGray;
+            ExpressionFont = new("Segue UI", 12);
         }
         /// <summary>
         /// Scales a base value according to current system DPI.

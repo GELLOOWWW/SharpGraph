@@ -167,13 +167,13 @@ namespace SharpGraph.Cartesian
             using Pen minorPen = new(Settings.MinorGridColor, 1) { DashStyle = DashStyle.Dash };
             using Pen majorPen = new(Settings.MajorGridColor, 1) { DashStyle = DashStyle.Dash };
 
-            float minorGridSpacingX = mapper.GridSpacingX(20);
-            float minorGridSpacingY = mapper.GridSpacingY(20);
+            float minorGridSpacingX = mapper.GridSpacingX(50);
+            float minorGridSpacingY = mapper.GridSpacingY(50);
             DrawGridLines(g, mapper, false, minorGridSpacingX, minorPen, false);
             DrawGridLines(g, mapper, false, minorGridSpacingY, minorPen, true);
 
-            float majorGridSpacingX = mapper.GridSpacingX(80);
-            float majorGridSpacingY = mapper.GridSpacingY(80);
+            float majorGridSpacingX = mapper.GridSpacingX(150);
+            float majorGridSpacingY = mapper.GridSpacingY(150);
             DrawGridLines(g, mapper, true, majorGridSpacingX, majorPen, false);
             DrawGridLines(g, mapper, true, majorGridSpacingY, majorPen, true);
 
@@ -182,7 +182,7 @@ namespace SharpGraph.Cartesian
                 int w = m.ScreenWidth;
                 int h = m.ScreenHeight;
 
-                Brush labelBrush = new SolidBrush(Settings.FgColor);
+                Brush labelBrush = new SolidBrush(Settings.GridNumColor);
                 Font labelFont = Settings.FontDefault;
 
                 if (gridSpacing <= 0) return;
@@ -240,7 +240,7 @@ namespace SharpGraph.Cartesian
 
             // draw origin point label (0)
             string s = "0";
-            Brush labelBrush = new SolidBrush(Settings.FgColor);
+            Brush labelBrush = new SolidBrush(Settings.GridNumColor);
             SizeF size = g.MeasureString(s, Settings.FontDefault);
             PointF labelPos = new(mapper.MapXToScreen(0) - 10, mapper.MapYToScreen(-0.225f) - size.Height / 2);
             g.DrawString(s, Settings.FontDefault, labelBrush, labelPos);
