@@ -11,6 +11,7 @@ namespace SharpGraph.Cartesian
         private readonly PictureBox pbGraph = pb ?? throw new ArgumentNullException(nameof(pb));
         private readonly GraphCoordinate mapper = new();
         private static readonly int step = 1;
+        private float unitsPerPixel = 0.25f;
 
         private readonly List<Bitmap> graphLayers = [];
         private readonly List<ParsedExpression> expressions = [];
@@ -25,6 +26,8 @@ namespace SharpGraph.Cartesian
         {
             pbGraph.Paint += PbGraph_Paint;
             pbGraph.Resize += PbGraph_Resize;
+            pbGraph.MouseEnter += PbGraph_MouseEnter;
+            pbGraph.PreviewKeyDown += PbGraph_Scroll;
             mapper.UpdateMap(pbGraph.Width, pbGraph.Height);
         }
 
@@ -76,6 +79,44 @@ namespace SharpGraph.Cartesian
             {
                 g.DrawImageUnscaled(bmp, 0, 0);
             }
+        }
+
+        private void PbGraph_MouseEnter(object? sender, EventArgs e)
+        {
+            pbGraph.Focus();
+        }
+
+        private async void PbGraph_Scroll(object? sender, MouseEventArgs e)
+        {
+            bool bMouseWheelUp = e.Delta >= 0; // e.Delta is scrolling up when Delta > 0
+            bool limit = unitsPerPixel == 1f || unitsPerPixel == 0.0125f;
+            if (bMouseWheelUp)
+            {
+                unitsPerPixel = limit ? 0.75f : unitsPerPixel * 2; // add unit per pixels
+            }
+            else
+            {
+                unitsPerPixel = limit ? 0.0025f : unitsPerPixel / 2; // subtract unit per pixels
+            }
+            mapper.UnitsPerPixel = unitsPerPixel;
+            await RefreshGraphsAsync();
+        }
+
+        private async void PbGraph_Scroll(object? sender, PreviewKeyDownEventArgs e)
+        {
+            var key = e.KeyCode;
+            bool upperLimit = unitsPerPixel >= 1f;
+            bool lowerLimit = unitsPerPixel <= 0.0125f;
+            if (key is Keys.OemCloseBrackets)
+            {
+                unitsPerPixel = upperLimit ? 1f : unitsPerPixel * 2; // add unit per pixels
+            }
+            if (key == Keys.OemOpenBrackets)
+            {
+                unitsPerPixel = lowerLimit ? 0.0125f : unitsPerPixel / 2; // subtract unit per pixels
+            }
+            mapper.UnitsPerPixel = unitsPerPixel;
+            await RefreshGraphsAsync();
         }
 
         private async void PbGraph_Resize(object? sender, EventArgs e)

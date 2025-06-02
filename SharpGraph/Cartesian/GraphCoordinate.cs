@@ -5,6 +5,7 @@ namespace SharpGraph.Cartesian
         public float xMin, xMax, yMin, yMax;
         public int ScreenWidth { get; private set; }
         public int ScreenHeight { get; private set; }
+        public float UnitsPerPixel { get; set; } = 0.0125f;
 
         /// <summary>
         /// Initialize a new Coordinate System object.
@@ -44,11 +45,11 @@ namespace SharpGraph.Cartesian
         /// <summary>
         /// Calculate Minimum and Maximum X and Y Cartesian Coordinates.
         /// </summary>
-        public void CalculateBounds(float unitsPerPixel = 0.025f)
+        public void CalculateBounds()
         {
-            xMin = -((ScreenWidth - 2) * unitsPerPixel) / 2;
+            xMin = -((ScreenWidth - 2) * UnitsPerPixel) / 2;
             xMax = -xMin; // Symmetric around 0
-            yMin = -((ScreenHeight - 2) * unitsPerPixel) / 2;
+            yMin = -((ScreenHeight - 2) * UnitsPerPixel) / 2;
             yMax = -yMin; // Symmetric around 0
         }
 
