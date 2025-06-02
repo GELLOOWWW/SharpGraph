@@ -7,13 +7,31 @@ namespace SharpGraph
         /// </summary>
         public static Color BgColor { get; set; }
 
+        /// <summary>
+        /// General Foreground color.
+        /// </summary>
         public static Color FgColor { get; set; }
 
+        /// <summary>
+        /// Background color for the UI elements.
+        /// </summary>
         public static Color UIColor { get; set; }
+        /// <summary>
+        /// Backcolor of the Text Boxes in the UI.
+        /// </summary>
         public static Color TextBoxColor { get; set; }
+        /// <summary>
+        /// Backcolor of the Text Boxes of the Expression boxes.
+        /// </summary>
         public static Color AddExprColor { get; set; }
+        /// <summary>
+        /// Backcolor of the Add Expression Color.
+        /// </summary>
         public static Color RemoveExprColor { get; set; }
 
+        /// <summary>
+        /// Color for error indicators.
+        /// </summary>
         public static Color ErrorColor { get; set; }
 
         /// <summary>
@@ -31,6 +49,9 @@ namespace SharpGraph
         /// </summary>
         public static Color AxisColor { get; set; }
 
+        /// <summary>
+        /// Color of the grid numbering in the cartesian plane.
+        /// </summary>
         public static Color GridNumColor { get; set; }
 
         /// <summary>
