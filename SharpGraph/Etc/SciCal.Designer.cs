@@ -97,7 +97,7 @@
             label8.Name = "label8";
             label8.Size = new Size(263, 34);
             label8.TabIndex = 77;
-            label8.Text = "Scientific Calculator";
+            label8.Text = "Calculator";
             // 
             // btnpercentage
             // 

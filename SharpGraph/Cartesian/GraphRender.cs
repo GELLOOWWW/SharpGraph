@@ -105,15 +105,16 @@ namespace SharpGraph.Cartesian
         private async void PbGraph_Scroll(object? sender, PreviewKeyDownEventArgs e)
         {
             var key = e.KeyCode;
-            bool upperLimit = unitsPerPixel >= 1f;
-            bool lowerLimit = unitsPerPixel <= 0.0125f;
+            float fLowerLimit = 0.00625f, fUpperLimit = 0.75f;
+            bool upperLimit = unitsPerPixel >= fUpperLimit;
+            bool lowerLimit = unitsPerPixel <= fLowerLimit;
             if (key is Keys.OemCloseBrackets)
             {
-                unitsPerPixel = upperLimit ? 1f : unitsPerPixel * 2; // add unit per pixels
+                unitsPerPixel = upperLimit ? fUpperLimit : unitsPerPixel * 2; // add unit per pixels
             }
             if (key == Keys.OemOpenBrackets)
             {
-                unitsPerPixel = lowerLimit ? 0.0125f : unitsPerPixel / 2; // subtract unit per pixels
+                unitsPerPixel = lowerLimit ? fLowerLimit : unitsPerPixel / 2; // subtract unit per pixels
             }
             mapper.UnitsPerPixel = unitsPerPixel;
             await RefreshGraphsAsync();

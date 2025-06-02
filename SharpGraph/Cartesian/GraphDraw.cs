@@ -164,13 +164,13 @@ namespace SharpGraph.Cartesian
             using Pen minorPen = new(Settings.MinorGridColor, 1) { DashStyle = DashStyle.Dash };
             using Pen majorPen = new(Settings.MajorGridColor, 1) { DashStyle = DashStyle.Dash };
 
-            float minorGridSpacingX = mapper.GridSpacingX(50);
-            float minorGridSpacingY = mapper.GridSpacingY(50);
+            float minorGridSpacingX = mapper.GridSpacingX(40);
+            float minorGridSpacingY = mapper.GridSpacingY(40);
             DrawGridLines(g, mapper, false, minorGridSpacingX, minorPen, false);
             DrawGridLines(g, mapper, false, minorGridSpacingY, minorPen, true);
 
-            float majorGridSpacingX = mapper.GridSpacingX(150);
-            float majorGridSpacingY = mapper.GridSpacingY(150);
+            float majorGridSpacingX = mapper.GridSpacingX(120);
+            float majorGridSpacingY = mapper.GridSpacingY(120);
             DrawGridLines(g, mapper, true, majorGridSpacingX, majorPen, false);
             DrawGridLines(g, mapper, true, majorGridSpacingY, majorPen, true);
 

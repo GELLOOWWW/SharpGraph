@@ -270,7 +270,7 @@
             radioButton3.Name = "radioButton3";
             radioButton3.Size = new Size(106, 33);
             radioButton3.TabIndex = 5;
-            radioButton3.Text = "Kelvin";
+            radioButton3.Text = "Celsius to Kelvin";
             radioButton3.UseVisualStyleBackColor = true;
             radioButton3.CheckedChanged += radioButton3_CheckedChanged_1;
             // 
