@@ -105,7 +105,7 @@ namespace SharpGraph
             MinorGridLines = true;
 
             FontDefault = new("Arial", 8);
-            ExpressionFont = new("Segue UI", 12);
+            ExpressionFont = new("Segoe UI", 12);
         }
         /// <summary>
         /// Scales a base value according to current system DPI.
