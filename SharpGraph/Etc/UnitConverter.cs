@@ -2,7 +2,7 @@
 {
     public partial class UnitConverter : Form
     {
-        readonly double meter;
+        readonly double meter = 0;
         string? op;
         public UnitConverter()
         {
