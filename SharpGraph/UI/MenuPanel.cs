@@ -34,7 +34,7 @@ namespace SharpGraph.UI
             var app1Item = new ToolStripMenuItem("Open Unit Converter");
             app1Item.Click += (s, e) => OpenForm(new UnitConverter());
 
-            var app2Item = new ToolStripMenuItem("Open Scientific Calculator");
+            var app2Item = new ToolStripMenuItem("Open Calculator");
             app2Item.Click += (s, e) => OpenForm(new SciCal());
 
             this.tsbtnApp.DropDownItems.Add(app1Item);
@@ -56,7 +56,7 @@ namespace SharpGraph.UI
 
             // Setup About DropDownButton shows description label
             var about1Item = new ToolStripMenuItem("About");
-            about1Item.Click += (_, _) => ShowMessage("idk");
+            about1Item.Click += (_, _) => ShowMessage("SharpGraph is a Graphing Calculator inspired by Desmos and the TI-84 Calculator, fully written in C#, using no other libraries or frameworks outside the core .NET framework itself. This app is capable of graphing most, if not all implicit functions (f(x,y) = 0) in a Cartesian Coordinate Plane.");
 
             this.tsbtnAbout.DropDownItems.Add(about1Item);
             this.tsbtnAbout.ToolTipText = "About this application";
@@ -96,7 +96,7 @@ namespace SharpGraph.UI
 
         private static void ShowMessage(string message)
         {
-            MessageBox.Show(message, "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
