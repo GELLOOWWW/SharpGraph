@@ -75,51 +75,51 @@
             {
                 case "KM":
                     double kilometer = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((1000 * kilometer).ToString());
+                    lblConverter.Text = ((1000 * kilometer).ToString() + "m");
                     break;
                 case "MK":
                     double Meter = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((meter / 1000).ToString());
+                    lblConverter.Text = ((meter / 1000).ToString() + "km");
                     break;
                 case "MF":
                     double Inches = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((3.280 * Inches).ToString());
+                    lblConverter.Text = ((3.280 * Inches).ToString() + "ft");
                     break;
                 case "FI":
                     double Feet = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((Feet * 12).ToString());
+                    lblConverter.Text = ((Feet * 12).ToString() + "in");
                     break;
                 case "KG":
                     double Kilo = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((1000 * Kilo).ToString());
+                    lblConverter.Text = ((1000 * Kilo).ToString() + "g");
                     break;
                 case "GK":
                     double Gram = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((Gram / 1000).ToString());
+                    lblConverter.Text = ((Gram / 1000).ToString() +"kg");
                     break;
                 case "LM":
                     double Liter = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((1000 * Liter).ToString());
+                    lblConverter.Text = ((1000 * Liter).ToString() + "mL");
                     break;
                 case "ML":
                     double Milliter = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((Milliter / 1000).ToString());
+                    lblConverter.Text = ((Milliter / 1000).ToString() + "L");
                     break;
                 case "CM":
                     double Centemiter = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((Centemiter / 100).ToString());
+                    lblConverter.Text = ((Centemiter / 100).ToString() + "m");
                     break;
                 case "CF":
                     double Celsius = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((((9 * Celsius) / 5) + 32).ToString());
+                    lblConverter.Text = ((9 * Celsius / 5) + 32.ToString()) + "F";
                     break;
                 case "FC":
                     double Fahrenheit = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((((Fahrenheit - 32) * 5) / 9).ToString());
+                    lblConverter.Text = (Fahrenheit - 32 * 5 / 9).ToString() + "C";
                     break;
                 case "K":
                     double Kelvin = Convert.ToDouble(txtConvert.Text);
-                    lblConverter.Text = ((((9 * Kelvin) / 5) + 273.15).ToString());
+                    lblConverter.Text = (9 * Kelvin / 5 + 273.15).ToString() + "K";
                     break;
             }
         }
